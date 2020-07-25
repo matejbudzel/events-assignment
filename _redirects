@@ -1,0 +1,3 @@
+# Netlify redirect settings
+# Serve index.html for any url - SPA router will do final routing
+/*    /index.html   200
