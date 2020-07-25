@@ -1,9 +1,11 @@
-import {Uuid, DateUtc, Markdown} from './api-common-types';
+import {Uuid, DateUtc, Markdown, Duration, Slug} from './api-common-types';
 
 export type Event = Readonly<{
 	id: Uuid;
-	startDate: DateUtc;
-	endDate: DateUtc;
+	slug: Slug;
+	previousSlugs?: Slug[];
 	summary: string;
+	date: DateUtc;
+	duration: Duration;
 	description?: Markdown;
 }>;

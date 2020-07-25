@@ -1,6 +1,6 @@
 # Time spent on this assignment
 
-TOTAL: **6 hours**
+TOTAL: **8 hours**
 
 | **day**   | **time** | **activity**                                                       |
 | --------- | -------- | ------------------------------------------------------------------ |
@@ -8,3 +8,4 @@ TOTAL: **6 hours**
 | 24.7.2020 | 2h       | fake api based on local storage + react-query hooks                |
 | 25.7.2020 | 2h       | first crude version of React components with i18n and react-router |
 | 25.7.2020 | 1h       | Netlify deployment and domain setup                                |
+| 25.7.2020 | 2h       | Added event slugs, added date picker and markdown editor           |

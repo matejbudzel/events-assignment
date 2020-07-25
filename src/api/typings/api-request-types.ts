@@ -1,9 +1,9 @@
-import {DateUtc, Markdown} from './api-common-types';
+import {DateUtc, Markdown, Duration} from './api-common-types';
 
 export type EventCreate = {
-	startDate: DateUtc;
-	endDate: DateUtc;
 	summary: string;
+	date: DateUtc;
+	duration: Duration;
 	description?: Markdown;
 };
 

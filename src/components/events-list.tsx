@@ -22,7 +22,7 @@ const EventsList = () => {
 						<div>
 							{data.map((event) => (
 								<div key={event.id}>
-									<Link to={routes.eventDetails(event.id)}>
+									<Link to={routes.eventDetails(event.slug)}>
 										{event.summary}
 									</Link>
 								</div>

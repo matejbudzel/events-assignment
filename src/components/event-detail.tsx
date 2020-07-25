@@ -1,15 +1,55 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, Redirect} from 'react-router-dom';
 import useEvent from '../api/hooks/use-event';
 import {useTranslation} from 'react-i18next';
+import {Slug, Uuid} from '../api/typings/api-common-types';
+import useDeleteEvent from '../api/hooks/use-delete-event';
+import {routes} from '../routes';
 
-type EventDetailContentProps = {
-	eventId: string;
+type EventDeleteButtonProps = {
+	eventId: Uuid;
 };
 
-const EventDetailContent = ({eventId}: EventDetailContentProps) => {
+const EventDeleteButton = ({eventId}: EventDeleteButtonProps) => {
 	const {t} = useTranslation();
-	const {isLoading, isError, error, data, isFetching} = useEvent(eventId);
+	const [
+		deleteEvent,
+		{
+			isLoading: isDeleting,
+			isError: isDeleteError,
+			isSuccess: isDeleteSuccess,
+			error: deleteError
+		}
+	] = useDeleteEvent();
+
+	if (isDeleteSuccess) {
+		return <Redirect to={routes.root()} />;
+	}
+
+	return (
+		<>
+			{isDeleting && <div>{t('event.detail.deleting')}</div>}
+			{isDeleteError && (
+				<div>
+					{t('event.detail.error.deleting', {message: deleteError?.message})}
+				</div>
+			)}
+			{!isDeleting && !isDeleteError && (
+				<button type="button" onClick={async () => deleteEvent({eventId})}>
+					{t('action.delete')}
+				</button>
+			)}
+		</>
+	);
+};
+
+type EventDetailContentProps = {
+	eventSlug: Slug;
+};
+
+const EventDetailContent = ({eventSlug}: EventDetailContentProps) => {
+	const {t} = useTranslation();
+	const {isLoading, isError, error, data, isFetching} = useEvent(eventSlug);
 	return (
 		<>
 			{isLoading && <div>{t('event.detail.loading')}</div>}
@@ -22,6 +62,10 @@ const EventDetailContent = ({eventId}: EventDetailContentProps) => {
 					{data !== undefined && (
 						<div>
 							<div>{data.summary}</div>
+							<div>{data.date}</div>
+							<div>{data.duration}</div>
+							<div>{data.description}</div>
+							<EventDeleteButton eventId={data.id} />
 						</div>
 					)}
 					<div>{isFetching ? t('event.detail.updating') : ' '}</div>
@@ -33,13 +77,13 @@ const EventDetailContent = ({eventId}: EventDetailContentProps) => {
 
 const EventDetail = () => {
 	const {t} = useTranslation();
-	const {eventId} = useParams<{eventId: string | undefined}>();
+	const {eventSlug} = useParams<{eventSlug: string | undefined}>();
 
-	if (eventId === undefined) {
-		return <div>{t('event.details.error.idUndefined')}</div>;
+	if (eventSlug === undefined) {
+		return <div>{t('event.details.error.slugUndefined')}</div>;
 	}
 
-	return <EventDetailContent eventId={eventId} />;
+	return <EventDetailContent eventSlug={eventSlug} />;
 };
 
 export default EventDetail;

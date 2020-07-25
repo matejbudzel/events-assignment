@@ -1,21 +1,21 @@
 import {useQuery, QueryResult} from 'react-query';
 import {fetchEvent} from '../local-storage/local-storage-api-endpoint';
-import {Uuid} from '../typings/api-common-types';
+import {Slug} from '../typings/api-common-types';
 import {Event} from '../typings/api-response-types';
 import {EventQueryKey, eventQueryKey} from './query-keys-event-types';
 
-const getEventById = async (
+const getEventBySlug = async (
 	_: 'event',
-	eventId: Uuid
+	eventSlug: Slug
 ): Promise<Event | undefined> => {
-	return fetchEvent(eventId);
+	return fetchEvent(eventSlug);
 };
 
 export default function useEvent(
-	eventId: Uuid
+	eventSlug: Slug
 ): QueryResult<Event | undefined> {
 	return useQuery<Event | undefined, EventQueryKey>(
-		eventQueryKey(eventId),
-		getEventById
+		eventQueryKey(eventSlug),
+		getEventBySlug
 	);
 }

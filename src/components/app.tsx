@@ -20,9 +20,6 @@ const App = () => {
 					<Route exact path={routes.newEvent()}>
 						<NewEvent />
 					</Route>
-					<Route exact path={routes.eventEdit()}>
-						<EventDetail />
-					</Route>
 					<Route exact path={routes.eventDetails()}>
 						<EventDetail />
 					</Route>
