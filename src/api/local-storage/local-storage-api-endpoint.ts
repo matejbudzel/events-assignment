@@ -11,18 +11,39 @@ import delay from 'delay';
 const LS_EVENT_KEY = 'events';
 const LS_EVENT_VERSION = '1';
 
+type LocalStorageEventData = Event[];
+
 type EventData = Map<Uuid, Event>;
 
 const simulateServerResponse = async () => {
 	await delay(5 + Math.floor(Math.random() * 20));
 };
 
-const loadData = () =>
-	loadDataFromLocalStorage<EventData>(LS_EVENT_KEY, LS_EVENT_VERSION) ??
-	new Map<Uuid, Event>();
+const loadData: () => EventData = () => {
+	const result = new Map<Uuid, Event>();
 
-const saveData = (data: EventData) =>
-	saveDataToLocalStorage(LS_EVENT_KEY, LS_EVENT_VERSION, data);
+	const loadedData = loadDataFromLocalStorage<LocalStorageEventData>(
+		LS_EVENT_KEY,
+		LS_EVENT_VERSION
+	);
+
+	if (loadedData) {
+		loadedData.forEach((event) => {
+			result.set(event.id, event);
+		});
+	}
+
+	return result;
+};
+
+const saveData = (data: EventData) => {
+	const savedData: LocalStorageEventData = [...data.values()];
+	saveDataToLocalStorage<LocalStorageEventData>(
+		LS_EVENT_KEY,
+		LS_EVENT_VERSION,
+		savedData
+	);
+};
 
 export async function fetchAllEvents(): Promise<Event[]> {
 	await simulateServerResponse();

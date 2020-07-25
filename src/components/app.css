@@ -1,0 +1,9 @@
+.app {
+  background-color: lightgray;
+}
+
+.app-header {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}

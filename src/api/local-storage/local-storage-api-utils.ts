@@ -2,6 +2,7 @@ import {v4 as uuidv4} from 'uuid';
 
 export function generateNewId(existingIds: Set<string>) {
 	let newId = uuidv4();
+
 	while (existingIds.has(newId)) {
 		newId = uuidv4();
 	}

@@ -1,0 +1,13 @@
+{
+  "app": {
+    "title": "evenTz"
+  },
+  "events": {
+    "list": {
+      "loading": "Loading events...",
+      "updating": "Updating events...",
+      "error": "Error: {{message}}",
+      "empty": "there are no events available"
+    }
+  }
+}
