@@ -1,0 +1,12 @@
+@import "../../style/variables";
+
+.app-body {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .app-body-content {
+      height: 100%;
+  }
+}

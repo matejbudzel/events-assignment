@@ -1,10 +1,10 @@
 import React from 'react';
 import {useParams, Redirect} from 'react-router-dom';
-import useEvent from '../api/hooks/use-event';
+import useEvent from '../../api/hooks/use-event';
 import {useTranslation} from 'react-i18next';
-import {Slug, Uuid} from '../api/typings/api-common-types';
-import useDeleteEvent from '../api/hooks/use-delete-event';
-import {routes} from '../routes';
+import {Slug, Uuid} from '../../api/typings/api-common-types';
+import useDeleteEvent from '../../api/hooks/use-delete-event';
+import {routes} from '../../routes';
 
 type EventDeleteButtonProps = {
 	eventId: Uuid;

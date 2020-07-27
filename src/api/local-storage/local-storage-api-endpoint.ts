@@ -8,6 +8,7 @@ import {
 	generateNewSlug
 } from './local-storage-api-utils';
 import delay from 'delay';
+import getDefaultEvents from './default-events-data';
 
 const LS_EVENT_KEY = 'events';
 const LS_EVENT_VERSION = '2';
@@ -25,22 +26,43 @@ const simulateServerResponseTime = async () => {
 	await delay(5 + Math.floor(Math.random() * 20));
 };
 
+const generateInitialEvents = () => {
+	const eventsMap: EventData = new Map();
+	const slugs = new Set<string>();
+
+	const events: Event[] = getDefaultEvents().map((eventCreateData) => {
+		const id = generateNewId(new Set());
+		const slug = generateNewSlug(eventCreateData.summary, id, slugs);
+		slugs.add(slug);
+		const event = {
+			id,
+			slug,
+			...eventCreateData
+		};
+		eventsMap.set(id, event);
+		return event;
+	});
+
+	saveData(eventsMap);
+
+	return events;
+};
+
 const loadData: () => LoadResponse = () => {
 	const events = new Map<Uuid, Event>();
 	const slugs = new Map<Slug, Uuid>();
 
-	const loadedData = loadDataFromLocalStorage<LocalStorageEventData>(
-		LS_EVENT_KEY,
-		LS_EVENT_VERSION
-	);
+	const loadedData =
+		loadDataFromLocalStorage<LocalStorageEventData>(
+			LS_EVENT_KEY,
+			LS_EVENT_VERSION
+		) ?? generateInitialEvents();
 
-	if (loadedData) {
-		loadedData.forEach((event) => {
-			events.set(event.id, event);
-			slugs.set(event.slug, event.id);
-			event.previousSlugs?.forEach((slug) => slugs.set(slug, event.id));
-		});
-	}
+	loadedData.forEach((event) => {
+		events.set(event.id, event);
+		slugs.set(event.slug, event.id);
+		event.previousSlugs?.forEach((slug) => slugs.set(slug, event.id));
+	});
 
 	return {events, slugs};
 };

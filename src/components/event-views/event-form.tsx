@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import useCreateEvent from '../api/hooks/use-create-event';
+import useCreateEvent from '../../api/hooks/use-create-event';
 import DatePicker from 'react-datepicker';
 import MarkdownIt from 'markdown-it';
 import MdEditor, {Plugins} from 'react-markdown-editor-lite';
@@ -7,7 +7,7 @@ import MdEditor, {Plugins} from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import {Redirect} from 'react-router-dom';
-import {routes} from '../routes';
+import {routes} from '../../routes';
 
 void MdEditor.unuse(Plugins.Image);
 

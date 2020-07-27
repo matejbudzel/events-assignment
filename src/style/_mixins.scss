@@ -1,0 +1,6 @@
+@import "./variables";
+
+@mixin focus {
+  outline: none;
+  box-shadow: 0 0 0 2px $color-dark, 0 0 0px 4px $color-focus;
+}

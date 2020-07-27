@@ -1,0 +1,42 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+
+@mixin button-type($type) {
+  &.#{$type} {
+    $type-color: map-get($colors, $type);
+
+    color: $type-color;
+    border-color: $type-color;
+
+    &:hover {
+      border-color: rgba($type-color, 0.5);
+      color: $color-white;
+      background-color: $type-color;
+    }
+  }
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 1rem;
+
+  text-transform: uppercase;
+  font-weight: $font-weight-medium;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition-duration: 0.25s;
+  transition-property: color, background-color, border-color;
+
+  background-color: transparent;
+
+  &:focus {
+    @include focus;
+  }
+
+  @include button-type("primary");
+  @include button-type("secondary");
+  @include button-type("danger");
+}

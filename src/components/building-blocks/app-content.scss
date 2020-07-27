@@ -1,0 +1,8 @@
+@import "../../style/variables";
+
+.app-content {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
+}

@@ -1,0 +1,30 @@
+$color-primary: #f19a17;
+$color-primary-light: #f1c652;
+$color-danger: #e03308;
+
+$color-white: #fcf8f4;
+$color-dark: #403d39;
+
+$color-secondary: $color-dark;
+
+$color-focus: #5a8ff0;
+
+$colors: (
+  "primary": $color-primary,
+  "secondary": $color-dark,
+  "danger": $color-danger,
+  "white": $color-white,
+  "dark": $color-dark,
+);
+
+$color-text-on-dark: $color-white;
+$color-text: $color-dark;
+
+$font-family: "Fira Sans", sans-serif;
+$font-weight: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+$content-max-width: 60rem;
+
+$overlay-image-size: 5rem;

@@ -1,0 +1,18 @@
+@import "./style/variables";
+
+@import "~normalize.css/normalize.css";
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  min-height: 100vh;
+
+  background-color: $color-white;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}

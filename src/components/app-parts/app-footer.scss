@@ -1,0 +1,11 @@
+@import "../../style/variables";
+
+.app-footer {
+  background-color: $color-primary-light;
+  padding: 1rem 0;
+
+  .app-footer-content {
+    display: flex;
+    justify-content: space-between;
+  }
+}

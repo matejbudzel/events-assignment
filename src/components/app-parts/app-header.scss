@@ -1,0 +1,16 @@
+@import "../../style/variables";
+
+.app-header {
+  background-color: $color-dark;
+
+  .app-header-content {
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .app-logo {
+      height: 1.5rem;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import '../../style/variables';
+
+.app-error-boundary {
+    width: 100vw;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $color-white;
+
+    .app-icon {
+        width: $overlay-image-size;
+        flex: 0 0 $overlay-image-size;
+    }
+
+    .emoji {
+        font-size: $overlay-image-size * 0.8;
+        flex: 0 0 auto;
+    }
+
+}

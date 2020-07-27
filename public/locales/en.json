@@ -1,13 +1,21 @@
 {
   "app": {
-    "title": "evenTz"
+    "title": "evenTz",
+    "footer": {
+      "mainNote": "Created with ❤️ by Matej Budzel as an interview assignment.",
+      "timestamp": "📅 July 2020"
+    }
+  },
+  "action": {
+    "addEvent": "create event",
+    "delete": "delete"
   },
   "events": {
     "list": {
       "loading": "Loading events...",
       "updating": "Updating events...",
-      "error": "Error: {{message}}",
-      "empty": "there are no events available"
+      "error": "Failed to load events. Error: {{message}}",
+      "emptyUpcoming": "There are no upcoming events."
     }
   }
 }
