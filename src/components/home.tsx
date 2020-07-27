@@ -1,8 +1,8 @@
 import React from 'react';
-import EventsListPage from './event-views/events-list-page';
+import EventsListPageOngoingUpcoming from './event-views/events-list-page-ongoing-upcoming';
 
 const Home = () => {
-	return <EventsListPage />;
+	return <EventsListPageOngoingUpcoming />;
 };
 
 export default Home;

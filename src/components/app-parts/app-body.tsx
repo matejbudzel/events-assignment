@@ -7,6 +7,8 @@ import Home from '../home';
 
 import './app-body.scss';
 import AppContent from '../building-blocks/app-content';
+import EventsListPagePast from '../event-views/events-list-page-past';
+import PageNotFound from '../event-views/page-not-found';
 
 const AppBody = () => {
 	return (
@@ -19,10 +21,15 @@ const AppBody = () => {
 					<Route exact path={routes.eventDetails()}>
 						<EventDetail />
 					</Route>
+					<Route exact path={routes.pastEvents()}>
+						<EventsListPagePast />
+					</Route>
 					<Route exact path={routes.root()}>
 						<Home />
 					</Route>
-					<Route>404</Route>
+					<Route>
+						<PageNotFound />
+					</Route>
 				</Switch>
 			</AppContent>
 		</div>

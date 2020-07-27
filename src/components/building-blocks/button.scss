@@ -39,4 +39,16 @@
   @include button-type("primary");
   @include button-type("secondary");
   @include button-type("danger");
+
+  &.link {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    opacity: 0.9;
+    font-size: 90%;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

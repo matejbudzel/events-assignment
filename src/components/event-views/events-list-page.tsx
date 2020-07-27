@@ -1,43 +1,53 @@
 import React from 'react';
-import useEvents from '../../api/hooks/use-events';
 import FetchedContent from '../building-blocks/fetched-content';
 import EventsList from './events-list';
-import Button from '../building-blocks/button';
 import {useTranslation} from 'react-i18next';
-import {useHistory} from 'react-router-dom';
-import {routes} from '../../routes';
+import {EventsListResponse} from '../../api/typings/api-response-types';
+import Page from '../building-blocks/page';
 
-const EventsListPage = () => {
+export type EventsListPageProps = {
+	headlineMessage?: string;
+	emptyListMessage: string;
+	emptyListAction?: JSX.Element;
+	isLoading: boolean;
+	isError: boolean;
+	error?: Error | null;
+	data?: EventsListResponse;
+	isFetching: boolean;
+};
+
+const EventsListPage = ({
+	headlineMessage,
+	emptyListMessage,
+	emptyListAction,
+	isLoading,
+	isError,
+	error,
+	data,
+	isFetching
+}: EventsListPageProps) => {
 	const {t} = useTranslation();
-	const history = useHistory();
-
-	const {isLoading, isError, error, data, isFetching} = useEvents();
 
 	return (
-		<FetchedContent
-			isLoading={isLoading}
-			loadingMessage="events.list.loading"
-			isError={isError}
-			errorMessage="events.list.error"
-			error={error ?? undefined}
-			isFetching={isFetching}
-			fetchingMessage="events.list.updating"
-		>
-			{() => (
-				<EventsList
-					events={data}
-					emptyListMessage="events.list.emptyUpcoming"
-					emptyListAction={
-						<Button
-							type="secondary"
-							onClick={() => history.push(routes.newEvent())}
-						>
-							{t('action.addEvent')}
-						</Button>
-					}
-				/>
-			)}
-		</FetchedContent>
+		<Page headline={headlineMessage && t(headlineMessage)}>
+			<FetchedContent
+				isLoading={isLoading}
+				loadingMessage="events.list.loading"
+				isError={isError}
+				errorMessage="events.list.error"
+				error={error ?? undefined}
+				isFetching={isFetching}
+				fetchingMessage="events.list.updating"
+			>
+				{() => (
+					<EventsList
+						events={data?.events}
+						emptyListMessage={emptyListMessage}
+						emptyListAction={emptyListAction}
+					/>
+				)}
+			</FetchedContent>
+		</Page>
 	);
 };
 

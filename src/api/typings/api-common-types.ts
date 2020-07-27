@@ -1,5 +1,9 @@
 export type Uuid = string;
 
+export function isUuid(uuid: unknown): uuid is Uuid {
+	return typeof uuid === 'string';
+}
+
 export type DateUtc = string;
 
 /** Duration of event in minutes */

@@ -9,3 +9,9 @@ export type Event = Readonly<{
 	duration: Duration;
 	description?: Markdown;
 }>;
+
+export type EventsListResponse = Readonly<{
+	timestamp: string;
+	type: 'ongoing-upcoming' | 'past';
+	events: Event[];
+}>;

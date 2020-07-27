@@ -2,6 +2,8 @@ import React, {ReactNode} from 'react';
 import {useTranslation} from 'react-i18next';
 import MessageOverlay from './message-overlay';
 
+import './fetched-content.scss';
+
 export type FetchedContentProps = {
 	isLoading?: boolean;
 	loadingMessage?: string;
@@ -29,7 +31,7 @@ const FetchedContent = ({
 		return (
 			<MessageOverlay
 				emoji="⌛"
-				message={loadingMessage ? t(loadingMessage) : undefined}
+				message={loadingMessage && t(loadingMessage)}
 			/>
 		);
 	}
@@ -38,23 +40,24 @@ const FetchedContent = ({
 		return (
 			<MessageOverlay
 				emoji="💣"
-				message={
-					errorMessage ? t(errorMessage, {message: error?.message}) : undefined
-				}
+				message={errorMessage && t(errorMessage, {message: error?.message})}
 			/>
 		);
 	}
 
-	if (isFetching) {
-		return (
-			<MessageOverlay
-				emoji="🔄"
-				message={fetchingMessage ? t(fetchingMessage) : undefined}
-			/>
-		);
-	}
-
-	return <div>{children ? children() : null}</div>;
+	return (
+		<div className="fetched-content">
+			{isFetching && (
+				<span className="update">
+					<span role="img" aria-label="update icon">
+						🔄
+					</span>
+					&nbsp;{fetchingMessage && t(fetchingMessage)}
+				</span>
+			)}
+			{children ? children() : null}
+		</div>
+	);
 };
 
 export default FetchedContent;

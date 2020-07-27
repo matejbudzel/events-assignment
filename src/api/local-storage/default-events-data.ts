@@ -1,7 +1,5 @@
 import {EventCreate} from '../typings/api-request-types';
-
-const HOUR_IN_MS = 60 * 60 * 1000;
-const DAY_IN_MS = 24 * HOUR_IN_MS;
+import {DAY_IN_MS, HOUR_IN_MS} from '../../utils/time-constants';
 
 const getDefaultEvents: () => EventCreate[] = () => {
 	const now = new Date();

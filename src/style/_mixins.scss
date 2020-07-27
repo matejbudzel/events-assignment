@@ -4,3 +4,12 @@
   outline: none;
   box-shadow: 0 0 0 2px $color-dark, 0 0 0px 4px $color-focus;
 }
+
+@mixin body-container($flex-basis: 100%) {
+  width: 100%;
+  flex: 1 0 $flex-basis;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

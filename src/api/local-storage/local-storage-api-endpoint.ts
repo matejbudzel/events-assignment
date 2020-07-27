@@ -1,4 +1,4 @@
-import {Event} from '../typings/api-response-types';
+import {Event, EventsListResponse} from '../typings/api-response-types';
 import {Uuid, Slug} from '../typings/api-common-types';
 import {EventUpdate, EventCreate} from '../typings/api-request-types';
 import {
@@ -9,6 +9,7 @@ import {
 } from './local-storage-api-utils';
 import delay from 'delay';
 import getDefaultEvents from './default-events-data';
+import {MINUTE_IN_MS, MAX_DATE, MIN_DATE} from '../../utils/time-constants';
 
 const LS_EVENT_KEY = 'events';
 const LS_EVENT_VERSION = '2';
@@ -76,10 +77,74 @@ const saveData = (data: EventData) => {
 	);
 };
 
-export async function fetchAllEvents(): Promise<Event[]> {
+const getEventFilter = (from: Date, to: Date, partialMatchIsOk: boolean) => (
+	event: Event
+) => {
+	const eventStart = Date.parse(event.date);
+	const eventEnd = eventStart + event.duration * MINUTE_IN_MS;
+
+	if (partialMatchIsOk) {
+		return eventStart < to.getTime() && eventEnd > from.getTime();
+	}
+
+	return eventStart >= from.getTime() && eventEnd <= to.getTime();
+};
+
+const sortEvents = (event1: Event, event2: Event) => {
+	const event1Date = Date.parse(event1.date);
+	const event2Date = Date.parse(event2.date);
+
+	if (event1Date === event2Date) {
+		const event1Summary = event1.summary;
+		const event2Summary = event2.summary;
+
+		if (event1Summary === event2Summary) {
+			const event1Duration = event1.duration;
+			const event2Duration = event2.duration;
+
+			if (event1Duration === event2Duration) {
+				return event1.id.localeCompare(event2.id);
+			}
+
+			return event1Duration - event2Duration;
+		}
+
+		return event1Summary.localeCompare(event2Summary);
+	}
+
+	return event1Date - event1Date;
+};
+
+const loadEventInPeriod = (from: Date, to: Date, partialMatchIsOk: boolean) => {
+	const allEvents = [...loadData().events.values()];
+	const isEventInInterval = getEventFilter(from, to, partialMatchIsOk);
+	return allEvents.filter((event) => isEventInInterval(event)).sort(sortEvents);
+};
+
+export async function fetchOngoingAndUpcomingEvents(): Promise<
+	EventsListResponse
+> {
 	await simulateServerResponseTime();
 
-	return [...loadData().events.values()];
+	const now = new Date();
+
+	return {
+		type: 'ongoing-upcoming',
+		timestamp: now.toUTCString(),
+		events: loadEventInPeriod(now, MAX_DATE, true)
+	};
+}
+
+export async function fetchPastEvents(): Promise<EventsListResponse> {
+	await simulateServerResponseTime();
+
+	const now = new Date();
+
+	return {
+		type: 'past',
+		timestamp: now.toUTCString(),
+		events: loadEventInPeriod(MIN_DATE, now, false)
+	};
 }
 
 export async function fetchEvent(slug: Slug): Promise<Event> {

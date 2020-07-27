@@ -4,6 +4,7 @@ import {Uuid} from '../typings/api-common-types';
 import {EventUpdate} from '../typings/api-request-types';
 import {Event} from '../typings/api-response-types';
 import {eventQueryKey} from './query-keys-event-types';
+import {invalidateEventLists} from './event-hook-utils';
 
 export type EventUpdateArguments = {
 	eventId: Uuid;
@@ -23,7 +24,10 @@ export default function useUpdateEvent(): MutationResultPair<
 	Error
 > {
 	return useMutation<Event, EventUpdateArguments>(updateEventById, {
-		onSuccess: (eventData) =>
-			queryCache.setQueryData(eventQueryKey(eventData.id), eventData)
+		onSuccess: (eventData) => {
+			queryCache.setQueryData(eventQueryKey(eventData.id), eventData);
+			// Invalidate event lists
+			invalidateEventLists();
+		}
 	});
 }

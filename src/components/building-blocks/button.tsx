@@ -5,7 +5,7 @@ import './button.scss';
 
 type ButtonProps = {
 	children: ReactNode;
-	type?: 'primary' | 'secondary' | 'danger';
+	type?: 'primary' | 'secondary' | 'danger' | 'link';
 	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => unknown;
 };
 

@@ -1,12 +1,14 @@
 @import "../../style/variables";
+@import "../../style/mixins";
 
 .app-body {
-  padding: 1rem 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  @include body-container;
+
+  > * {
+    @include body-container;
+  }
 
   .app-body-content {
-      height: 100%;
+    @include body-container;
   }
 }

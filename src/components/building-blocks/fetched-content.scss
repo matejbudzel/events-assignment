@@ -1,0 +1,16 @@
+@import '../../style/mixins';
+
+.fetched-content {
+  position: relative;
+  width: 100%;
+
+  @include body-container(auto);
+
+  .update {
+    position: absolute;
+    right: 0;
+    top: -1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+  }
+}
