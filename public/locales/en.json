@@ -11,6 +11,7 @@
   },
   "action": {
     "addEvent": "create event",
+    "save": "save",
     "delete": "delete",
     "goHome": "go to the homescreen",
     "showPastEvent": "show past events",
@@ -51,6 +52,21 @@
       "past": "finished",
       "upcoming": "upcoming",
       "unknown": "?"
+    },
+    "create": {
+      "pageTitle": "🆕 Create new event",
+      "fields": {
+        "summary": "Summary",
+        "start": "Start at",
+        "duration": "Duration",
+        "description": "Description"
+      }
     }
+  },
+  "duration": {
+    "minute": "1 minute",
+    "minute_plural": "{{count}} minutes",
+    "hour": "1 hour",
+    "hour_plural": "{{count}} hours"
   }
 }

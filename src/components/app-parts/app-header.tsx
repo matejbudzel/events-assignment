@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {Link, useHistory, Route, Switch} from 'react-router-dom';
 import {routes} from '../../routes';
 import {useTranslation} from 'react-i18next';
 
@@ -19,13 +19,18 @@ const AppHeader = () => {
 				<Link to={routes.root()}>
 					<img className="app-logo" src={Logo} alt={t('app.title')} />
 				</Link>
-				<Button
-					darkBackground
-					type="primary"
-					onClick={() => history.push(routes.newEvent())}
-				>
-					{t('action.addEvent')}
-				</Button>
+				<Switch>
+					<Route exact path={routes.newEvent()} />
+					<Route>
+						<Button
+							darkBackground
+							type="primary"
+							onClick={() => history.push(routes.newEvent())}
+						>
+							{t('action.addEvent')}
+						</Button>
+					</Route>
+				</Switch>
 			</AppContent>
 		</header>
 	);

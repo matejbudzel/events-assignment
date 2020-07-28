@@ -1,0 +1,32 @@
+@import "../../style/variables";
+@import "../../style/mixins";
+
+.input {
+  > input,
+  > select {
+    border: $input-border-width solid rgba($color-dark, 0.5);
+    padding: 0.5rem $input-padding;
+    border-radius: 2rem;
+
+    &:focus,
+    &:focus-within {
+      @include focus;
+    }
+  }
+
+  &.input-group {
+    display: flex;
+    align-items: center;
+
+    > input:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    > input:not(:first-child) {
+      margin-left: 0.5rem;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}

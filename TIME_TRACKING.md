@@ -1,6 +1,6 @@
 # Time spent on this assignment
 
-TOTAL: **19 hours**
+TOTAL: **22.5 hours**
 
 | **day**   | **time** | **activity**                                                                                     |
 | --------- | -------- | ------------------------------------------------------------------------------------------------ |
@@ -12,3 +12,4 @@ TOTAL: **19 hours**
 | 27.7.2020 | 4.5h     | Added normalize.css and a lot of new React components + 3 events are generated on initial launch |
 | 27.7.2020 | 2.5h     | Refactoring of events list + new components and style fixes                                      |
 | 28.7.2020 | 4h       | Improved events lists and event details screen                                                   |
+| 28.7.2020 | 3.5h     | Improved form and form fields + other small tweaks                                               |

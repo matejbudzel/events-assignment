@@ -131,7 +131,7 @@ const sortEvents = (event1: Event, event2: Event) => {
 		return event1Summary.localeCompare(event2Summary);
 	}
 
-	return event1Date - event1Date;
+	return event1Date - event2Date;
 };
 
 const loadEventInPeriod = (from: Date, to: Date, partialMatchIsOk: boolean) => {
