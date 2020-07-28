@@ -1,29 +1,30 @@
 import {Event, EventStatus} from '../typings/api-response-types';
 import {MINUTE_IN_MS} from '../../utils/date-time-utils';
-import {DateUtcString} from '../typings/api-common-types';
 
-export const getEventStartTimestamp = ({date}: Event) => {
+export const getEventStartTimestamp = ({date}: Pick<Event, 'date'>) => {
 	return Date.parse(date);
 };
 
-export const getEventStartDate = (event: Event) => {
+export const getEventStartDate = (event: Pick<Event, 'date'>) => {
 	return new Date(getEventStartTimestamp(event));
 };
 
-export const getEventEndTimestamp = ({date, duration}: Event) => {
+export const getEventEndTimestamp = ({
+	date,
+	duration
+}: Pick<Event, 'date' | 'duration'>) => {
 	const startDate = Date.parse(date);
 	return startDate + duration * MINUTE_IN_MS;
 };
 
-export const getEventEndDate = (event: Event) => {
+export const getEventEndDate = (event: Pick<Event, 'date' | 'duration'>) => {
 	return new Date(getEventEndTimestamp(event));
 };
 
 export const getEventStatus: (
-	eventDate: DateUtcString,
-	eventDuration: number,
+	event: Pick<Event, 'date' | 'duration'>,
 	now: number
-) => EventStatus = (eventDate, eventDuration, now) => {
+) => EventStatus = ({date: eventDate, duration: eventDuration}, now) => {
 	const eventStart = Date.parse(eventDate);
 	const eventEnd = eventStart + eventDuration * MINUTE_IN_MS;
 

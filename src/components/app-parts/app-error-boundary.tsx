@@ -20,7 +20,7 @@ export default class AppErrorBoundary extends React.Component<
 	}
 
 	componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-		console.log('App Failed!', error, errorInfo);
+		console.error('App Failed!', error, errorInfo);
 	}
 
 	render() {

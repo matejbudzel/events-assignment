@@ -6,10 +6,19 @@ import {
 	updateDateFromTimeInput
 } from '../../utils/date-time-utils';
 import {InputProps, InputWrapper} from './input';
+import useFocusOnMount from '../hooks/use-focus-on-mount';
 
 export type DateTimeInputProps = InputProps<Date | null>;
 
-const DateTimeInput = ({id, value, onChange}: DateTimeInputProps) => {
+const DateTimeInput = ({
+	id,
+	value,
+	disabled,
+	onChange,
+	focusOnMount
+}: DateTimeInputProps) => {
+	const inputRef = useFocusOnMount<HTMLInputElement>(focusOnMount);
+
 	const [dateValue, setDateValue] = useState(
 		value ? getDateForInput(value) : ''
 	);
@@ -40,7 +49,7 @@ const DateTimeInput = ({id, value, onChange}: DateTimeInputProps) => {
 		// Date input changed value - parse it and notify the parent - null if parsing failed
 		const _onChange = onChangeRef.current;
 		const _value = valueRef.current;
-		if (_value) {
+		if (_value && _onChange) {
 			try {
 				_onChange(updateDateFromDateInput(_value, dateValue));
 			} catch (error) {
@@ -54,7 +63,7 @@ const DateTimeInput = ({id, value, onChange}: DateTimeInputProps) => {
 		// Time input changed value - parse it and notify the parent - null if parsing failed
 		const _onChange = onChangeRef.current;
 		const _value = valueRef.current;
-		if (_value) {
+		if (_value && _onChange) {
 			try {
 				_onChange(updateDateFromTimeInput(_value, timeValue));
 			} catch (error) {
@@ -67,13 +76,16 @@ const DateTimeInput = ({id, value, onChange}: DateTimeInputProps) => {
 	return (
 		<InputWrapper group id={id}>
 			<input
+				ref={inputRef}
 				id={id + '-date'}
+				disabled={disabled}
 				type="date"
 				value={dateValue}
 				onChange={(event) => setDateValue(event.target.value)}
 			/>
 			<input
 				id={id + '-time'}
+				disabled={disabled}
 				type="time"
 				value={timeValue}
 				onChange={(event) => setTimeValue(event.target.value)}

@@ -13,6 +13,10 @@ import Button from '../../building-blocks/button';
 import TextInput from '../../building-blocks/text-input';
 import DateTimeInput from '../../building-blocks/datetime-input';
 import DurationInput from '../../building-blocks/duration-input';
+import FlexContainer from '../../building-blocks/flex-container';
+import {getEventEndDate} from '../../../api/data-object-utils/event-utils';
+import FlexSpacer from '../../building-blocks/flex-spacer';
+import {getNextFullHour} from '../../../utils/date-time-utils';
 
 void MdEditor.unuse(Plugins.Image);
 
@@ -36,7 +40,7 @@ const EventForm = () => {
 	] = useCreateEvent();
 
 	const [summary, setSummary] = useState('');
-	const [date, setDate] = useState<Date | null>(new Date());
+	const [date, setDate] = useState<Date | null>(new Date(getNextFullHour()));
 	const [duration, setDuration] = useState(DEFAULT_DURATION);
 	const [description, setDescription] = useState('');
 
@@ -48,6 +52,7 @@ const EventForm = () => {
 		<Form>
 			<FormField label={t('event.create.fields.summary')}>
 				<TextInput
+					focusOnMount
 					id="event-form-summary"
 					value={summary}
 					onChange={(newValue) => {
@@ -56,26 +61,41 @@ const EventForm = () => {
 					}}
 				/>
 			</FormField>
-			<FormField label={t('event.create.fields.start')}>
-				<DateTimeInput
-					id="event-form-start"
-					value={date}
-					onChange={(newValue) => {
-						setDate(newValue);
-						resetSaveState();
-					}}
-				/>
-			</FormField>
-			<FormField label={t('event.create.fields.duration')}>
-				<DurationInput
-					id="event-form-duration"
-					value={duration}
-					onChange={(newValue) => {
-						setDuration(newValue);
-						resetSaveState();
-					}}
-				/>
-			</FormField>
+			<FlexContainer>
+				<FormField label={t('event.create.fields.start')}>
+					<DateTimeInput
+						id="event-form-start"
+						value={date}
+						onChange={(newValue) => {
+							setDate(newValue);
+							resetSaveState();
+						}}
+					/>
+				</FormField>
+				<FlexSpacer />
+				<FormField label={t('event.create.fields.duration')}>
+					<DurationInput
+						id="event-form-duration"
+						value={duration}
+						onChange={(newValue) => {
+							setDuration(newValue);
+							resetSaveState();
+						}}
+					/>
+				</FormField>
+				<FlexSpacer />
+				<FormField label={t('event.create.fields.end')}>
+					<DateTimeInput
+						disabled
+						id="event-form-end"
+						value={
+							date
+								? getEventEndDate({date: date.toUTCString(), duration})
+								: null
+						}
+					/>
+				</FormField>
+			</FlexContainer>
 			<FormField label={t('event.create.fields.description')}>
 				<MdEditor
 					value={description}

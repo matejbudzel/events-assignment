@@ -58,6 +58,7 @@
       "fields": {
         "summary": "Summary",
         "start": "Start at",
+        "end": "End at",
         "duration": "Duration",
         "description": "Description"
       }

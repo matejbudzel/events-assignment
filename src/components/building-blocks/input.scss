@@ -12,6 +12,14 @@
     &:focus-within {
       @include focus;
     }
+
+    &:disabled {
+      border-color: rgba($color-dark, 0.05);
+    }
+
+    &:only-child {
+      width: 100%;
+    }
   }
 
   &.input-group {

@@ -9,6 +9,9 @@ export const MAX_DATE = new Date(
 	new Date(new Date().setFullYear(9999, 11, 31)).setHours(23, 59, 59, 999)
 );
 
+export const getNextFullHour = () =>
+	new Date(new Date().setMinutes(0, 0, 0) + HOUR_IN_MS);
+
 const pad = (number: number, pad = 2) => `${number}`.padStart(pad, '0');
 
 export const getDateForInput = (date: Date) =>

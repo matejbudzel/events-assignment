@@ -6,7 +6,9 @@ import './input.scss';
 export type InputProps<T> = {
 	id: string;
 	value: T;
-	onChange: (value: T) => unknown;
+	disabled?: boolean;
+	onChange?: (value: T) => unknown;
+	focusOnMount?: boolean;
 };
 
 export type InputWrapperProps = {

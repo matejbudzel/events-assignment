@@ -46,11 +46,7 @@ const generateInitialEvents = () => {
 			id,
 			slug,
 			...eventCreateData,
-			status: getEventStatus(
-				eventCreateData.date,
-				eventCreateData.duration,
-				now
-			)
+			status: getEventStatus(eventCreateData, now)
 		};
 		eventsMap.set(id, event);
 		return event;
@@ -75,7 +71,7 @@ const loadData: () => LoadResponse = () => {
 
 	const eventsList: Event[] = loadedData.map((event) => ({
 		...event,
-		status: getEventStatus(event.date, event.duration, now)
+		status: getEventStatus(event, now)
 	}));
 
 	eventsList.forEach((event) => {
@@ -199,11 +195,7 @@ export async function addEvent(eventCreateData: EventCreate): Promise<Event> {
 		id: eventId,
 		slug: eventSlug,
 		...eventCreateData,
-		status: getEventStatus(
-			eventCreateData.date,
-			eventCreateData.duration,
-			Date.now()
-		)
+		status: getEventStatus(eventCreateData, Date.now())
 	};
 
 	events.set(eventId, newEventData);

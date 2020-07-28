@@ -1,16 +1,33 @@
-@import '../../style/variables';
-@import '../../style/mixins';
+@import "../../style/variables";
+@import "../../style/mixins";
 
 .form-field {
+  margin-bottom: 1rem;
 
-    margin-bottom: 1rem;
+  > label {
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    opacity: 0.9;
+    display: block;
+    margin-bottom: 0.25rem;
+    margin-left: calc(#{$input-padding} + #{$input-border-width});
+  }
 
-    > label {
-        font-weight: $font-weight-medium;
-        text-transform: uppercase;
-        opacity: 0.9;
-        display: block;
-        margin-bottom: 0.25rem;
-        margin-left: calc(#{$input-padding} + #{$input-border-width});
+  @media screen and (max-width: 35rem) {
+    width: 100%;
+    flex-basis: 100%;
+
+    > * {
+      width: 100%;
+      flex-basis: 100%;
+
+      .input-group > * {
+          flex-grow: 1;
+      }
+
+      .flex-spacer {
+          display: none;
+      }
     }
+  }
 }
