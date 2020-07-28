@@ -1,11 +1,14 @@
 $color-primary: #f19a17;
 $color-primary-light: #f1c652;
 $color-danger: #e03308;
+$color-live: $color-danger;
 
 $color-white: #fcf8f4;
 $color-dark: #2b2825;
 
 $color-secondary: $color-dark;
+
+$color-text: $color-dark;
 
 $color-focus: #5a8ff0;
 
@@ -28,3 +31,5 @@ $font-weight-bold: 700;
 $content-max-width: 60rem;
 
 $overlay-image-size: 5rem;
+
+$horizontal-rule-border: 2px solid rgba($color-secondary, 0.1)

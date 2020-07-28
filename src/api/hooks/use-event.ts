@@ -16,6 +16,9 @@ export default function useEvent(
 ): QueryResult<Event | undefined> {
 	return useQuery<Event | undefined, EventQueryKey>(
 		eventQueryKey(eventSlug),
-		getEventBySlug
+		getEventBySlug,
+		{
+			retry: false
+		}
 	);
 }

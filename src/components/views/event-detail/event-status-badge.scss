@@ -1,0 +1,24 @@
+@import "../../../style/variables";
+
+.event-status-badge {
+  font-size: 0.75rem;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid;
+  border-radius: 1rem;
+
+  text-transform: uppercase;
+
+  display: inline-block;
+
+  margin-right: 0.5rem;
+
+  &.event-status-ongoing {
+    border-color: $color-live;
+    color: $color-live;
+  }
+
+  * + & {
+    margin-left: 0.5rem;
+  }
+}

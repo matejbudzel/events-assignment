@@ -1,0 +1,14 @@
+@import "../../../style/variables";
+
+.event-timestamp {
+  display: block;
+
+  .event-date {
+    font-weight: $font-weight-medium;
+  }
+
+  .event-time {
+    margin-left: 0.25rem;
+    font-size: 0.75rem;
+  }
+}

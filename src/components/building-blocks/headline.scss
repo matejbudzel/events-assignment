@@ -1,4 +1,8 @@
 .headline {
+
+  display: flex;
+  align-items: center;
+
   h1 & {
     font-size: 2rem;
     line-height: 3rem;

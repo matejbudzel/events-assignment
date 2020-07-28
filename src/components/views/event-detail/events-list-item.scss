@@ -1,0 +1,59 @@
+@import "../../../style/variables";
+@import "../../../style/mixins";
+
+.events-list-item {
+  .events-list-item-anchor {
+    display: block;
+    border: 1px solid transparent;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: rgba($color-secondary, 0.1);
+
+    text-decoration: none;
+
+    color: $color-text;
+
+    transition: 0.25s;
+    transition-property: color, border-color, background-color;
+
+    &:hover {
+      border-color: rgba($color-primary, 0.9);
+      background: rgba($color-primary-light, 0.75);
+    }
+
+    &:active {
+      color: $color-text;
+    }
+
+    &:focus {
+      @include focus;
+    }
+
+    .event-summary {
+      display: flex;
+      align-items: center;
+      
+      font-weight: $font-weight-bold;
+      font-size: 1.5rem;
+      opacity: 0.9;
+
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &.event-status-ongoing {
+    .events-list-item-anchor {
+      background-color: rgba($color-primary, 0.5);
+    }
+  }
+
+  &.event-status-upcoming {
+    .events-list-item-anchor {
+      background-color: rgba($color-primary-light, 0.25);
+    }
+  }
+
+  + .events-list-item {
+    margin-top: 1rem;
+  }
+}

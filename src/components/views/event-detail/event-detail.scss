@@ -1,0 +1,17 @@
+@import "../../../style/mixins";
+
+.event-detail {
+  @include body-container(auto);
+}
+
+.event-delete-zone {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem 0;
+  border-top: $horizontal-rule-border;
+
+  .event-delete-zone-error {
+    color: $color-danger;
+    margin-left: 0.5rem;
+  }
+}

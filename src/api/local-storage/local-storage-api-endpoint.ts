@@ -9,7 +9,12 @@ import {
 } from './local-storage-api-utils';
 import delay from 'delay';
 import getDefaultEvents from './default-events-data';
-import {MINUTE_IN_MS, MAX_DATE, MIN_DATE} from '../../utils/time-constants';
+import {MAX_DATE, MIN_DATE} from '../../utils/date-time-utils';
+import {
+	getEventStartTimestamp,
+	getEventEndTimestamp,
+	getEventStatus
+} from '../data-object-utils/event-utils';
 
 const LS_EVENT_KEY = 'events';
 const LS_EVENT_VERSION = '2';
@@ -31,6 +36,8 @@ const generateInitialEvents = () => {
 	const eventsMap: EventData = new Map();
 	const slugs = new Set<string>();
 
+	const now = Date.now();
+
 	const events: Event[] = getDefaultEvents().map((eventCreateData) => {
 		const id = generateNewId(new Set());
 		const slug = generateNewSlug(eventCreateData.summary, id, slugs);
@@ -38,7 +45,12 @@ const generateInitialEvents = () => {
 		const event = {
 			id,
 			slug,
-			...eventCreateData
+			...eventCreateData,
+			status: getEventStatus(
+				eventCreateData.date,
+				eventCreateData.duration,
+				now
+			)
 		};
 		eventsMap.set(id, event);
 		return event;
@@ -59,7 +71,14 @@ const loadData: () => LoadResponse = () => {
 			LS_EVENT_VERSION
 		) ?? generateInitialEvents();
 
-	loadedData.forEach((event) => {
+	const now = Date.now();
+
+	const eventsList: Event[] = loadedData.map((event) => ({
+		...event,
+		status: getEventStatus(event.date, event.duration, now)
+	}));
+
+	eventsList.forEach((event) => {
 		events.set(event.id, event);
 		slugs.set(event.slug, event.id);
 		event.previousSlugs?.forEach((slug) => slugs.set(slug, event.id));
@@ -80,8 +99,8 @@ const saveData = (data: EventData) => {
 const getEventFilter = (from: Date, to: Date, partialMatchIsOk: boolean) => (
 	event: Event
 ) => {
-	const eventStart = Date.parse(event.date);
-	const eventEnd = eventStart + event.duration * MINUTE_IN_MS;
+	const eventStart = getEventStartTimestamp(event);
+	const eventEnd = getEventEndTimestamp(event);
 
 	if (partialMatchIsOk) {
 		return eventStart < to.getTime() && eventEnd > from.getTime();
@@ -91,8 +110,8 @@ const getEventFilter = (from: Date, to: Date, partialMatchIsOk: boolean) => (
 };
 
 const sortEvents = (event1: Event, event2: Event) => {
-	const event1Date = Date.parse(event1.date);
-	const event2Date = Date.parse(event2.date);
+	const event1Date = getEventStartTimestamp(event1);
+	const event2Date = getEventStartTimestamp(event2);
 
 	if (event1Date === event2Date) {
 		const event1Summary = event1.summary;
@@ -130,7 +149,6 @@ export async function fetchOngoingAndUpcomingEvents(): Promise<
 
 	return {
 		type: 'ongoing-upcoming',
-		timestamp: now.toUTCString(),
 		events: loadEventInPeriod(now, MAX_DATE, true)
 	};
 }
@@ -142,7 +160,6 @@ export async function fetchPastEvents(): Promise<EventsListResponse> {
 
 	return {
 		type: 'past',
-		timestamp: now.toUTCString(),
 		events: loadEventInPeriod(MIN_DATE, now, false)
 	};
 }
@@ -181,7 +198,12 @@ export async function addEvent(eventCreateData: EventCreate): Promise<Event> {
 	const newEventData: Event = {
 		id: eventId,
 		slug: eventSlug,
-		...eventCreateData
+		...eventCreateData,
+		status: getEventStatus(
+			eventCreateData.date,
+			eventCreateData.duration,
+			Date.now()
+		)
 	};
 
 	events.set(eventId, newEventData);

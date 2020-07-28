@@ -19,7 +19,11 @@ const AppHeader = () => {
 				<Link to={routes.root()}>
 					<img className="app-logo" src={Logo} alt={t('app.title')} />
 				</Link>
-				<Button type="primary" onClick={() => history.push(routes.newEvent())}>
+				<Button
+					darkBackground
+					type="primary"
+					onClick={() => history.push(routes.newEvent())}
+				>
 					{t('action.addEvent')}
 				</Button>
 			</AppContent>

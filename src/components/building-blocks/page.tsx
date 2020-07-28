@@ -4,7 +4,7 @@ import Headline from './headline';
 import './page.scss';
 
 export type PageProps = {
-	headline?: string;
+	headline?: ReactNode;
 	children?: ReactNode;
 };
 

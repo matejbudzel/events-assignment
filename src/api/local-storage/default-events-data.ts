@@ -1,5 +1,5 @@
 import {EventCreate} from '../typings/api-request-types';
-import {DAY_IN_MS, HOUR_IN_MS} from '../../utils/time-constants';
+import {DAY_IN_MS, HOUR_IN_MS} from '../../utils/date-time-utils';
 
 const getDefaultEvents: () => EventCreate[] = () => {
 	const now = new Date();
@@ -12,7 +12,7 @@ const getDefaultEvents: () => EventCreate[] = () => {
 				new Date(now.getTime() - 7 * DAY_IN_MS).setHours(18, 0, 0, 0)
 			).toUTCString(),
 			description:
-				'# React Hackathon\n\nWe will be messing around with [hooks API](https://reactjs.org/docs/hooks-intro.html).\n'
+				'We will be messing around with [hooks API](https://reactjs.org/docs/hooks-intro.html).\n\n```js\nexport default function HookComponent() {\n  useHook()\n  return <div>Hooks are awesome!</div>\n}\n```\n'
 		},
 		{
 			summary: 'Crytocurrencies 101',
@@ -22,7 +22,7 @@ const getDefaultEvents: () => EventCreate[] = () => {
 				new Date(now.getTime() - HOUR_IN_MS).setMinutes(0, 0, 0)
 			).toUTCString(),
 			description:
-				'# Crytocurrencies 101\n\nIntroduction to Cryptocurrencies. We will be discussing following topics:\n\n* What is a cryptocurrency?\n* How can I use it?\n* ...\n'
+				'Introduction to Cryptocurrencies. We will be discussing following topics:\n\n* What is a cryptocurrency?\n* How can I use it?\n* ...\n'
 		},
 		{
 			summary: 'How to survive Zombie Apocalypse! 🧟',
@@ -32,7 +32,7 @@ const getDefaultEvents: () => EventCreate[] = () => {
 				new Date(now.getTime() + 3 * DAY_IN_MS).setMinutes(0, 0, 0)
 			).toUTCString(),
 			description:
-				'# How to survive Zombie Apocalypse! 🧟\n\nBrace yourselves! They are coming for us!\n\nOR MAYBE YOU COUND STAND AND FIGHT! 🥊\n'
+				'Brace yourselves! They are coming for us!\n\nOR MAYBE YOU COUND STAND AND FIGHT! 🥊\n'
 		}
 	];
 };

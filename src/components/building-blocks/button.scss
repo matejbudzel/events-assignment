@@ -8,7 +8,7 @@
     color: $type-color;
     border-color: $type-color;
 
-    &:hover {
+    &:hover:not(:disabled) {
       border-color: rgba($type-color, 0.5);
       color: $color-white;
       background-color: $type-color;
@@ -32,8 +32,19 @@
 
   background-color: transparent;
 
+  &:disabled {
+    opacity: 0.75;
+    cursor: default;
+  }
+
   &:focus {
     @include focus;
+  }
+
+  &.on-dark-background {
+    &:focus {
+      @include focus('dark');
+    }
   }
 
   @include button-type("primary");

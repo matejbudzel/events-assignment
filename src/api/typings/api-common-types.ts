@@ -4,7 +4,7 @@ export function isUuid(uuid: unknown): uuid is Uuid {
 	return typeof uuid === 'string';
 }
 
-export type DateUtc = string;
+export type DateUtcString = string;
 
 /** Duration of event in minutes */
 export type Duration = number;

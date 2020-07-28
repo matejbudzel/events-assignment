@@ -1,8 +1,14 @@
 @import "./variables";
 
-@mixin focus {
+@mixin focus($type: 'white') {
   outline: none;
-  box-shadow: 0 0 0 2px $color-dark, 0 0 0px 4px $color-focus;
+
+  $inner-shadow-color: $color-white;
+  @if ($type == 'dark') {
+    $inner-shadow-color: $color-dark;
+  }
+
+  box-shadow: 0 0 0 2px $inner-shadow-color, 0 0 0px 4px $color-focus;
 }
 
 @mixin body-container($flex-basis: 100%) {

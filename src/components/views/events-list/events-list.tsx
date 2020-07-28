@@ -1,8 +1,10 @@
 import React from 'react';
-import EventListItem from './event-list-item';
-import {Event} from '../../api/typings/api-response-types';
-import MessageOverlay from '../building-blocks/message-overlay';
+import EventListItem from '../event-detail/events-list-item';
+import {Event} from '../../../api/typings/api-response-types';
+import MessageOverlay from '../../building-blocks/message-overlay';
 import {useTranslation} from 'react-i18next';
+
+import './events-list.scss';
 
 export type EventsListProps = {
 	events?: Event[];
@@ -28,11 +30,11 @@ const EventsList = ({
 	}
 
 	return (
-		<div>
+		<ul className="events-list">
 			{events.map((event) => (
 				<EventListItem key={event.id} event={event} />
 			))}
-		</div>
+		</ul>
 	);
 };
 

@@ -2,13 +2,13 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import {routes} from '../../routes';
 import NewEvent from '../event-views/new-event';
-import EventDetail from '../event-views/event-detail';
-import Home from '../home';
+import EventDetailPage from '../views/event-detail/event-detail-page';
+import Home from '../views/home';
 
 import './app-body.scss';
 import AppContent from '../building-blocks/app-content';
-import EventsListPagePast from '../event-views/events-list-page-past';
-import PageNotFound from '../event-views/page-not-found';
+import EventsListPagePast from '../views/events-list/events-list-page-past';
+import PageNotFound from '../views/page-not-found';
 
 const AppBody = () => {
 	return (
@@ -18,8 +18,8 @@ const AppBody = () => {
 					<Route exact path={routes.newEvent()}>
 						<NewEvent />
 					</Route>
-					<Route exact path={routes.eventDetails()}>
-						<EventDetail />
+					<Route path={routes.eventDetails()}>
+						<EventDetailPage />
 					</Route>
 					<Route exact path={routes.pastEvents()}>
 						<EventsListPagePast />

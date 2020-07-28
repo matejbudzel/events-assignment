@@ -3,6 +3,8 @@
 .page {
     @include body-container;
 
+    position: relative;
+
     .page-content {
         @include body-container(auto);
     }

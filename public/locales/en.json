@@ -13,15 +13,16 @@
     "addEvent": "create event",
     "delete": "delete",
     "goHome": "go to the homescreen",
-    "showPastEvent": "show past events"
+    "showPastEvent": "show past events",
+    "showOngoingAndUpcomingEvents": "show ongoing & upcoming events"
   },
   "events": {
     "list": {
       "pageTitle": {
-        "ongoing": "Ongoing Events",
-        "upcoming": "Upcoming Events",
-        "ongoingUpcoming": "Ongoing & Upcoming Events",
-        "past": "Past Events"
+        "ongoing": "🕐 Ongoing Events",
+        "upcoming": "🕐 Upcoming Events",
+        "ongoingUpcoming": "🕐 Ongoing & Upcoming Events",
+        "past": "🛑 Past Events"
       },
       "loading": "Loading events...",
       "updating": "Updating events...",
@@ -30,6 +31,26 @@
         "upcoming": "There are no upcoming events.",
         "past": "There are no past events."
       }
+    }
+  },
+  "event": {
+    "detail": {
+      "pageTitle": "🎫 {{eventName}}",
+      "deleting": "deleting...",
+      "loading": "Loading event...",
+      "updating": "Updating event...",
+      "error": {
+        "deleting": "Event could not be deleted: {{message}}",
+        "noData": "This event does not exist.",
+        "slugUndefined": "No event ID.",
+        "loading": "Event could not be loaded: {{message}}"
+      }
+    },
+    "status": {
+      "ongoing": "LIVE!",
+      "past": "finished",
+      "upcoming": "upcoming",
+      "unknown": "?"
     }
   }
 }
