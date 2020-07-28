@@ -5,7 +5,7 @@ import './app-suspense.scss';
 const AppSuspense = () => {
 	return (
 		<div className="app-suspense">
-			<img src={Icon} />
+			<img src={Icon} alt="evenTz logo" />
 		</div>
 	);
 };
