@@ -2,6 +2,11 @@
 
 .event-detail {
   @include body-container(auto);
+
+  .event-detail-metainfo {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .event-delete-zone {

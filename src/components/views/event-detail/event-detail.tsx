@@ -13,6 +13,7 @@ import {Event} from '../../../api/typings/api-response-types';
 import MessageOverlay from '../../building-blocks/message-overlay';
 import Button from '../../building-blocks/button';
 import FlexSpacer from '../../building-blocks/flex-spacer';
+import EventStatusBadge from './event-status-badge';
 
 type EventDeleteZoneProps = {
 	eventId: Uuid;
@@ -67,7 +68,10 @@ const EventDetail = ({event}: EventDetailProps) => {
 
 	return (
 		<div className="event-detail">
-			<EventTimestamp event={event} />
+			<div className="event-detail-metainfo">
+				<EventStatusBadge event={event} />
+				<EventTimestamp event={event} />
+			</div>
 			{event.description && <MarkdownPreview content={event.description} />}
 			<FlexSpacer />
 			<EventDeleteZone eventId={event.id} />

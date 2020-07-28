@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {useParams} from 'react-router-dom';
 import useEvent from '../../../api/hooks/use-event';
 import {useTranslation} from 'react-i18next';
@@ -8,7 +8,6 @@ import FetchedContent from '../../building-blocks/fetched-content';
 
 import EventDetail from './event-detail';
 import MessageOverlay from '../../building-blocks/message-overlay';
-import EventStatusBadge from './event-status-badge';
 
 type EventDetailPageContentProps = {
 	eventSlug: Slug;
@@ -21,15 +20,14 @@ const EventDetailPageContent = ({eventSlug}: EventDetailPageContentProps) => {
 		eventSlug
 	);
 
-	const headlineComponent: ReactNode = event ? (
-		<>
-			<span>{t('event.detail.pageTitle', {eventName: event.summary})}</span>
-			<EventStatusBadge event={event} />
-		</>
-	) : null;
-
 	return (
-		<Page headline={headlineComponent}>
+		<Page
+			headline={
+				event
+					? t('event.detail.pageTitle', {eventName: event.summary})
+					: undefined
+			}
+		>
 			<FetchedContent
 				isLoading={isLoading}
 				loadingMessage="event.detail.loading"

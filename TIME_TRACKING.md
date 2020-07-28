@@ -1,6 +1,6 @@
 # Time spent on this assignment
 
-TOTAL: **15 hours**
+TOTAL: **19 hours**
 
 | **day**   | **time** | **activity**                                                                                     |
 | --------- | -------- | ------------------------------------------------------------------------------------------------ |
@@ -11,4 +11,4 @@ TOTAL: **15 hours**
 | 25.7.2020 | 2h       | Added event slugs, added date picker and markdown editor                                         |
 | 27.7.2020 | 4.5h     | Added normalize.css and a lot of new React components + 3 events are generated on initial launch |
 | 27.7.2020 | 2.5h     | Refactoring of events list + new components and style fixes                                      |
-| 28.7.2020 | 2.5h     | Improved events lists and event details screen                                                   |
+| 28.7.2020 | 4h       | Improved events lists and event details screen                                                   |
