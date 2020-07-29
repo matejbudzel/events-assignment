@@ -12,3 +12,9 @@ export type Duration = number;
 export type Markdown = string;
 
 export type Slug = string;
+
+export type ValidationErrorType = 'no-empty' | 'required' | 'invalid';
+
+export type ValidationData = {
+	[key: string]: ValidationErrorType | null;
+};

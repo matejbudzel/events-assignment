@@ -2,7 +2,7 @@ import React from 'react';
 import FetchedContent from '../../building-blocks/fetched-content';
 import EventsList from './events-list';
 import {useTranslation} from 'react-i18next';
-import {EventsListResponse} from '../../../api/typings/api-response-types';
+import {EventsListResponse} from '../../../api/typings/events/api-events-response-types';
 import Page from '../../building-blocks/page';
 
 import './events-list-page.scss';

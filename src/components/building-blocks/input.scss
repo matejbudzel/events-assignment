@@ -31,6 +31,14 @@
     border-bottom-right-radius: 0.25rem;
   }
 
+  &.invalid {
+    > input,
+    > select,
+    > textarea {
+      border-color: $color-danger;
+    }
+  }
+
   &.input-group {
     display: flex;
     align-items: center;

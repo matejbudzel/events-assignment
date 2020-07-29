@@ -1,4 +1,4 @@
-import {Event, EventStatus} from '../typings/api-response-types';
+import {Event, EventStatus} from '../typings/events/api-events-response-types';
 import {MINUTE_IN_MS} from '../../utils/date-time-utils';
 
 export const getEventStartTimestamp = ({date}: Pick<Event, 'date'>) => {

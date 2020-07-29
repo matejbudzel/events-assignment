@@ -1,9 +1,9 @@
 import {useMutation, queryCache, MutationResultPair} from 'react-query';
-import {updateEvent} from '../local-storage/local-storage-api-endpoint';
-import {Uuid} from '../typings/api-common-types';
-import {EventUpdate} from '../typings/api-request-types';
-import {Event} from '../typings/api-response-types';
-import {eventQueryKey} from './query-keys-event-types';
+import {updateEvent} from '../../local-storage/events/local-storage-events-endpoint';
+import {Uuid} from '../../typings/api-common-types';
+import {EventUpdate} from '../../typings/events/api-events-request-types';
+import {Event} from '../../typings/events/api-events-response-types';
+import {eventQueryKey} from './events-query-keys';
 import {invalidateEventLists} from './event-hook-utils';
 
 export type EventUpdateArguments = {

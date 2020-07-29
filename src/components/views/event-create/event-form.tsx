@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import useCreateEvent from '../../../api/hooks/use-create-event';
+import useCreateEvent from '../../../api/hooks/events/use-create-event';
 
 import {Redirect} from 'react-router-dom';
 import {routes} from '../../../routes';
@@ -18,6 +18,8 @@ import PageFooter from '../../building-blocks/page-footer';
 
 import './event-form.scss';
 import TextAreaInput from '../../building-blocks/textarea-input';
+import {ValidationData} from '../../../api/typings/api-common-types';
+import {isValidationError} from '../../../utils/validation-error';
 
 const DEFAULT_DURATION = 60; // 1 hour in minutes
 
@@ -41,6 +43,22 @@ const EventForm = () => {
 	const [duration, setDuration] = useState(DEFAULT_DURATION);
 	const [description, setDescription] = useState('');
 
+	const validationData: ValidationData =
+		saveError && isValidationError(saveError) ? saveError.validationData : {};
+	const isSaveValidationError = saveError && isValidationError(saveError);
+
+	const summaryInvalid = validationData.summary
+		? t('validation.type.' + validationData.summary)
+		: undefined;
+
+	const dateInvalid = validationData.date
+		? t('validation.type.' + validationData.date)
+		: undefined;
+
+	const durationInvalid = validationData.duration
+		? t('validation.type.' + validationData.duration)
+		: undefined;
+
 	if (isSaveSuccess && newEvent) {
 		return <Redirect to={routes.eventDetails(newEvent.slug)} />;
 	}
@@ -48,12 +66,16 @@ const EventForm = () => {
 	return (
 		<div className="event-form">
 			<Form>
-				<FormField label={t('event.create.fields.summary')}>
+				<FormField
+					label={t('event.create.fields.summary')}
+					invalid={summaryInvalid}
+				>
 					<TextInput
 						focusOnMount
 						id="event-form-summary"
 						placeholder={t('event.create.placeholder.summary')}
 						value={summary}
+						invalid={Boolean(summaryInvalid)}
 						onChange={(newValue) => {
 							setSummary(newValue);
 							resetSaveState();
@@ -61,10 +83,14 @@ const EventForm = () => {
 					/>
 				</FormField>
 				<FlexContainer>
-					<FormField label={t('event.create.fields.start')}>
+					<FormField
+						label={t('event.create.fields.start')}
+						invalid={dateInvalid}
+					>
 						<DateTimeInput
 							id="event-form-start"
 							value={date}
+							invalid={Boolean(dateInvalid)}
 							onChange={(newValue) => {
 								setDate(newValue);
 								resetSaveState();
@@ -72,10 +98,14 @@ const EventForm = () => {
 						/>
 					</FormField>
 					<FlexSpacer />
-					<FormField label={t('event.create.fields.duration')}>
+					<FormField
+						label={t('event.create.fields.duration')}
+						invalid={durationInvalid}
+					>
 						<DurationInput
 							id="event-form-duration"
 							value={duration}
+							invalid={Boolean(durationInvalid)}
 							onChange={(newValue) => {
 								setDuration(newValue);
 								resetSaveState();
@@ -110,8 +140,12 @@ const EventForm = () => {
 			<FlexSpacer />
 			<PageFooter
 				errorMessage={
-					isSaveError
-						? t('event.create.error.save', {message: saveError?.message})
+					isSaveValidationError
+						? t('validation.couldNotSave')
+						: isSaveError
+						? t('event.create.error.save', {
+								message: saveError?.message
+						  })
 						: undefined
 				}
 			>

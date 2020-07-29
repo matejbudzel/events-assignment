@@ -1,5 +1,5 @@
-import {EventCreate} from '../typings/api-request-types';
-import {DAY_IN_MS, HOUR_IN_MS} from '../../utils/date-time-utils';
+import {EventCreate} from '../../typings/events/api-events-request-types';
+import {DAY_IN_MS, HOUR_IN_MS} from '../../../utils/date-time-utils';
 
 const getDefaultEvents: () => EventCreate[] = () => {
 	const now = new Date();

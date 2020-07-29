@@ -1,8 +1,8 @@
 import {useMutation, queryCache, MutationResultPair} from 'react-query';
-import {EventCreate} from '../typings/api-request-types';
-import {Event} from '../typings/api-response-types';
-import {eventQueryKey} from './query-keys-event-types';
-import {addEvent} from '../local-storage/local-storage-api-endpoint';
+import {EventCreate} from '../../typings/events/api-events-request-types';
+import {Event} from '../../typings/events/api-events-response-types';
+import {eventQueryKey} from './events-query-keys';
+import {addEvent} from '../../local-storage/events/local-storage-events-endpoint';
 import {invalidateEventLists} from './event-hook-utils';
 
 export type EventCreateArguments = EventCreate;

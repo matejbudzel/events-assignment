@@ -11,6 +11,24 @@
     display: block;
     margin-bottom: 0.75rem;
     margin-left: calc(#{$input-padding} + #{$input-border-width});
+
+    .form-field-validation-message {
+      text-transform: none;
+      font-weight: $font-weight;
+      margin-left: 1rem;
+
+      &::before {
+        content: "//";
+        display: inline-block;
+        margin-right: 0.25rem;
+      }
+    }
+  }
+
+  &.invalid {
+    > label {
+      color: $color-danger;
+    }
   }
 
   @media screen and (max-width: 35rem) {
@@ -22,11 +40,11 @@
       flex-basis: 100%;
 
       .input-group > * {
-          flex-grow: 1;
+        flex-grow: 1;
       }
 
       .flex-spacer {
-          display: none;
+        display: none;
       }
     }
   }

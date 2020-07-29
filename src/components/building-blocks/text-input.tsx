@@ -10,6 +10,7 @@ const TextInput = ({
 	id,
 	value,
 	disabled,
+	invalid,
 	onChange,
 	focusOnMount,
 	placeholder
@@ -17,7 +18,7 @@ const TextInput = ({
 	const inputRef = useFocusOnMount<HTMLInputElement>(focusOnMount);
 
 	return (
-		<InputWrapper>
+		<InputWrapper invalid={invalid}>
 			<input
 				ref={inputRef}
 				id={id}

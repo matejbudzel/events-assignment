@@ -1,6 +1,7 @@
 import {v4 as uuidv4} from 'uuid';
 import {Uuid, Slug} from '../typings/api-common-types';
 import slugify from 'slugify';
+import delay from 'delay';
 
 export function generateNewId(existingIds: Set<Uuid>): Uuid {
 	let newId: Uuid = uuidv4();
@@ -71,3 +72,7 @@ export function saveDataToLocalStorage<T>(
 		})
 	);
 }
+
+export const simulateServerResponseTime = async () => {
+	await delay(5 + Math.floor(Math.random() * 20));
+};

@@ -1,6 +1,6 @@
 import React from 'react';
 import EventsListPage from './events-list-page';
-import usePastEvents from '../../../api/hooks/use-past-events';
+import usePastEvents from '../../../api/hooks/events/use-past-events';
 import {useHistory} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {routes} from '../../../routes';

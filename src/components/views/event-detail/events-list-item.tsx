@@ -1,6 +1,6 @@
 import React from 'react';
 import {routes} from '../../../routes';
-import {Event} from '../../../api/typings/api-response-types';
+import {Event} from '../../../api/typings/events/api-events-response-types';
 import {Link} from 'react-router-dom';
 
 import './events-list-item.scss';

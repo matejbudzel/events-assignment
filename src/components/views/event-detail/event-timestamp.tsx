@@ -1,5 +1,5 @@
 import React from 'react';
-import {Event} from '../../../api/typings/api-response-types';
+import {Event} from '../../../api/typings/events/api-events-response-types';
 import {
 	getEventStartDate,
 	getEventEndDate

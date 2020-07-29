@@ -1,5 +1,5 @@
 import {queryCache} from 'react-query';
-import {isEventsListQueryKey} from './query-keys-event-types';
+import {isEventsListQueryKey} from './events-query-keys';
 
 export const invalidateEventLists = () => {
 	// Invalidate event lists

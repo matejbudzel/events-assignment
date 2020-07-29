@@ -10,6 +10,7 @@ const TextAreaInput = ({
 	id,
 	value,
 	disabled,
+	invalid,
 	onChange,
 	focusOnMount,
 	placeholder
@@ -17,7 +18,7 @@ const TextAreaInput = ({
 	const inputRef = useFocusOnMount<HTMLTextAreaElement>(focusOnMount);
 
 	return (
-		<InputWrapper>
+		<InputWrapper invalid={invalid}>
 			<textarea
 				ref={inputRef}
 				id={id}

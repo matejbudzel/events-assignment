@@ -1,8 +1,8 @@
 import {useQuery, QueryResult} from 'react-query';
-import {fetchEvent} from '../local-storage/local-storage-api-endpoint';
-import {Slug} from '../typings/api-common-types';
-import {Event} from '../typings/api-response-types';
-import {EventQueryKey, eventQueryKey} from './query-keys-event-types';
+import {fetchEvent} from '../../local-storage/events/local-storage-events-endpoint';
+import {Slug} from '../../typings/api-common-types';
+import {Event} from '../../typings/events/api-events-response-types';
+import {EventQueryKey, eventQueryKey} from './events-query-keys';
 
 const getEventBySlug = async (
 	_: 'event',

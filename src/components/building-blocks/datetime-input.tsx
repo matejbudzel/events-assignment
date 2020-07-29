@@ -14,6 +14,7 @@ const DateTimeInput = ({
 	id,
 	value,
 	disabled,
+	invalid,
 	onChange,
 	focusOnMount
 }: DateTimeInputProps) => {
@@ -74,7 +75,7 @@ const DateTimeInput = ({
 	}, [timeValue, idRef, onChangeRef, valueRef]);
 
 	return (
-		<InputWrapper group id={id}>
+		<InputWrapper group id={id} invalid={invalid}>
 			<input
 				ref={inputRef}
 				id={id + '-date'}

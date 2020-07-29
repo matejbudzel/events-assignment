@@ -4,7 +4,7 @@ import {
 	Markdown,
 	Duration,
 	Slug
-} from './api-common-types';
+} from '../api-common-types';
 
 export type EventStatus = 'past' | 'ongoing' | 'upcoming';
 

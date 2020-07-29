@@ -1,11 +1,11 @@
 import React from 'react';
-import useOngoingAndUpcomingEvents from '../../../api/hooks/use-ongoing-and-upcoming-events';
+import useOngoingAndUpcomingEvents from '../../../api/hooks/events/use-ongoing-and-upcoming-events';
 import EventsListPage from './events-list-page';
 import {useHistory} from 'react-router-dom';
 import Button from '../../building-blocks/button';
 import {routes} from '../../../routes';
 import {useTranslation} from 'react-i18next';
-import usePastEvents from '../../../api/hooks/use-past-events';
+import usePastEvents from '../../../api/hooks/events/use-past-events';
 
 const EventsListPageOngoingUpcoming = () => {
 	const {t} = useTranslation();

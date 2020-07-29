@@ -2,14 +2,14 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {Uuid} from '../../../api/typings/api-common-types';
-import useDeleteEvent from '../../../api/hooks/use-delete-event';
+import useDeleteEvent from '../../../api/hooks/events/use-delete-event';
 import {routes} from '../../../routes';
 
 import EventTimestamp from './event-timestamp';
 import MarkdownPreview from '../../building-blocks/markdown-preview';
 
 import './event-detail.scss';
-import {Event} from '../../../api/typings/api-response-types';
+import {Event} from '../../../api/typings/events/api-events-response-types';
 import MessageOverlay from '../../building-blocks/message-overlay';
 import Button from '../../building-blocks/button';
 import FlexSpacer from '../../building-blocks/flex-spacer';

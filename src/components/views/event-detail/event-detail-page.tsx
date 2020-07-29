@@ -1,6 +1,6 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
-import useEvent from '../../../api/hooks/use-event';
+import useEvent from '../../../api/hooks/events/use-event';
 import {useTranslation} from 'react-i18next';
 import {Slug} from '../../../api/typings/api-common-types';
 import Page from '../../building-blocks/page';
