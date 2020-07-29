@@ -1,3 +1,5 @@
 .flex-spacer {
-    flex-grow: 1;
+    flex: 1 0 0;
+    min-width: 1rem;
+    height: 0;
 }

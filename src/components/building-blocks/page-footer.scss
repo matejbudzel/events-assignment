@@ -1,0 +1,13 @@
+@import "../../style/variables";
+
+.page-footer {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem 0;
+  border-top: $horizontal-rule-border;
+
+  .page-footer-error {
+    color: $color-danger;
+    margin-left: 0.5rem;
+  }
+}

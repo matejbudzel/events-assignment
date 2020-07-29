@@ -2,14 +2,14 @@
 @import "../../style/mixins";
 
 .form-field {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   > label {
     font-weight: $font-weight-medium;
     text-transform: uppercase;
     opacity: 0.9;
     display: block;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.75rem;
     margin-left: calc(#{$input-padding} + #{$input-border-width});
   }
 

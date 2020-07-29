@@ -2,23 +2,23 @@ import React from 'react';
 import {InputProps, InputWrapper} from './input';
 import useFocusOnMount from '../hooks/use-focus-on-mount';
 
-export type TextInputProps = InputProps<string> & {
+export type TextAreaInputProps = InputProps<string> & {
 	placeholder?: string;
 };
 
-const TextInput = ({
+const TextAreaInput = ({
 	id,
 	value,
 	disabled,
 	onChange,
 	focusOnMount,
 	placeholder
-}: TextInputProps) => {
-	const inputRef = useFocusOnMount<HTMLInputElement>(focusOnMount);
+}: TextAreaInputProps) => {
+	const inputRef = useFocusOnMount<HTMLTextAreaElement>(focusOnMount);
 
 	return (
 		<InputWrapper>
-			<input
+			<textarea
 				ref={inputRef}
 				id={id}
 				disabled={disabled}
@@ -32,4 +32,4 @@ const TextInput = ({
 	);
 };
 
-export default TextInput;
+export default TextAreaInput;

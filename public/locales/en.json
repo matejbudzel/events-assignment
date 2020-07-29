@@ -61,7 +61,15 @@
         "end": "End at",
         "duration": "Duration",
         "description": "Description"
-      }
+      },
+      "placeholder": {
+        "summary": "This will be a title of the event...",
+        "description": "You can use markdown..."
+      },
+      "error": {
+        "save": "Could not create the event: {{message}}"
+      },
+      "saving": "saving..."
     }
   },
   "duration": {

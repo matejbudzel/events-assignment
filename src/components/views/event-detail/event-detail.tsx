@@ -14,12 +14,13 @@ import MessageOverlay from '../../building-blocks/message-overlay';
 import Button from '../../building-blocks/button';
 import FlexSpacer from '../../building-blocks/flex-spacer';
 import EventStatusBadge from './event-status-badge';
+import PageFooter from '../../building-blocks/page-footer';
 
-type EventDeleteZoneProps = {
+type EventDetailFooterProps = {
 	eventId: Uuid;
 };
 
-const EventDeleteZone = ({eventId}: EventDeleteZoneProps) => {
+const EventDetailFooter = ({eventId}: EventDetailFooterProps) => {
 	const {t} = useTranslation();
 	const [
 		deleteEvent,
@@ -36,7 +37,13 @@ const EventDeleteZone = ({eventId}: EventDeleteZoneProps) => {
 	}
 
 	return (
-		<div className="event-delete-zone">
+		<PageFooter
+			errorMessage={
+				isDeleteError
+					? t('event.detail.error.deleting', {message: deleteError?.message})
+					: undefined
+			}
+		>
 			<Button
 				disabled={isDeleting}
 				type="danger"
@@ -44,12 +51,7 @@ const EventDeleteZone = ({eventId}: EventDeleteZoneProps) => {
 			>
 				{t(isDeleting ? 'event.detail.deleting' : 'action.delete')}
 			</Button>
-			{isDeleteError && (
-				<span className="event-delete-zone-error">
-					{t('event.detail.error.deleting', {message: deleteError?.message})}
-				</span>
-			)}
-		</div>
+		</PageFooter>
 	);
 };
 
@@ -74,7 +76,7 @@ const EventDetail = ({event}: EventDetailProps) => {
 			</div>
 			{event.description && <MarkdownPreview content={event.description} />}
 			<FlexSpacer />
-			<EventDeleteZone eventId={event.id} />
+			<EventDetailFooter eventId={event.id} />
 		</div>
 	);
 };

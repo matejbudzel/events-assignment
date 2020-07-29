@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import useCreateEvent from '../../../api/hooks/use-create-event';
-import MarkdownIt from 'markdown-it';
-import MdEditor, {Plugins} from 'react-markdown-editor-lite';
 
-import 'react-markdown-editor-lite/lib/index.css';
 import {Redirect} from 'react-router-dom';
 import {routes} from '../../../routes';
 import Form from '../../building-blocks/form';
@@ -17,12 +14,12 @@ import FlexContainer from '../../building-blocks/flex-container';
 import {getEventEndDate} from '../../../api/data-object-utils/event-utils';
 import FlexSpacer from '../../building-blocks/flex-spacer';
 import {getNextFullHour} from '../../../utils/date-time-utils';
+import PageFooter from '../../building-blocks/page-footer';
 
-void MdEditor.unuse(Plugins.Image);
+import './event-form.scss';
+import TextAreaInput from '../../building-blocks/textarea-input';
 
 const DEFAULT_DURATION = 60; // 1 hour in minutes
-
-const mdParser = new MarkdownIt();
 
 const EventForm = () => {
 	const {t} = useTranslation();
@@ -49,76 +46,91 @@ const EventForm = () => {
 	}
 
 	return (
-		<Form>
-			<FormField label={t('event.create.fields.summary')}>
-				<TextInput
-					focusOnMount
-					id="event-form-summary"
-					value={summary}
-					onChange={(newValue) => {
-						setSummary(newValue);
-						resetSaveState();
-					}}
-				/>
-			</FormField>
-			<FlexContainer>
-				<FormField label={t('event.create.fields.start')}>
-					<DateTimeInput
-						id="event-form-start"
-						value={date}
+		<div className="event-form">
+			<Form>
+				<FormField label={t('event.create.fields.summary')}>
+					<TextInput
+						focusOnMount
+						id="event-form-summary"
+						placeholder={t('event.create.placeholder.summary')}
+						value={summary}
 						onChange={(newValue) => {
-							setDate(newValue);
+							setSummary(newValue);
 							resetSaveState();
 						}}
 					/>
 				</FormField>
-				<FlexSpacer />
-				<FormField label={t('event.create.fields.duration')}>
-					<DurationInput
-						id="event-form-duration"
-						value={duration}
+				<FlexContainer>
+					<FormField label={t('event.create.fields.start')}>
+						<DateTimeInput
+							id="event-form-start"
+							value={date}
+							onChange={(newValue) => {
+								setDate(newValue);
+								resetSaveState();
+							}}
+						/>
+					</FormField>
+					<FlexSpacer />
+					<FormField label={t('event.create.fields.duration')}>
+						<DurationInput
+							id="event-form-duration"
+							value={duration}
+							onChange={(newValue) => {
+								setDuration(newValue);
+								resetSaveState();
+							}}
+						/>
+					</FormField>
+					<FlexSpacer />
+					<FormField label={t('event.create.fields.end')}>
+						<DateTimeInput
+							disabled
+							id="event-form-end"
+							value={
+								date
+									? getEventEndDate({date: date.toUTCString(), duration})
+									: null
+							}
+						/>
+					</FormField>
+				</FlexContainer>
+				<FormField label={t('event.create.fields.description')}>
+					<TextAreaInput
+						id="event-form-description"
+						placeholder={t('event.create.placeholder.description')}
+						value={description}
 						onChange={(newValue) => {
-							setDuration(newValue);
+							setDescription(newValue);
 							resetSaveState();
 						}}
 					/>
 				</FormField>
-				<FlexSpacer />
-				<FormField label={t('event.create.fields.end')}>
-					<DateTimeInput
-						disabled
-						id="event-form-end"
-						value={
-							date
-								? getEventEndDate({date: date.toUTCString(), duration})
-								: null
-						}
-					/>
-				</FormField>
-			</FlexContainer>
-			<FormField label={t('event.create.fields.description')}>
-				<MdEditor
-					value={description}
-					renderHTML={(text) => mdParser.render(text)}
-					allowPasteImage={false}
-					onChange={({text}) => setDescription(text)}
-				/>
-			</FormField>
-			<Button
-				type="primary"
-				onClick={async () =>
-					createEvent({
-						summary,
-						date: date ? date.toUTCString() : '',
-						duration
-					})
+			</Form>
+			<FlexSpacer />
+			<PageFooter
+				errorMessage={
+					isSaveError
+						? t('event.create.error.save', {message: saveError?.message})
+						: undefined
 				}
 			>
-				{t('action.save')}
-			</Button>
-			{isSaving && <div>saving...</div>}
-			{isSaveError && <div>could not save: {saveError?.message}</div>}
-		</Form>
+				<Button
+					disabled={isSaving}
+					type="primary"
+					onClick={async () =>
+						createEvent({
+							date: date ? date.toUTCString() : '',
+							duration,
+							summary,
+							description
+						})
+					}
+				>
+					{t(isSaving ? 'event.create.saving' : 'action.save')}
+				</Button>
+			</PageFooter>
+		</div>
 	);
 };
 

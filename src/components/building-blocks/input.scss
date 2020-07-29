@@ -3,10 +3,13 @@
 
 .input {
   > input,
-  > select {
+  > select,
+  > textarea {
     border: $input-border-width solid rgba($color-dark, 0.5);
     padding: 0.5rem $input-padding;
-    border-radius: 2rem;
+    border-radius: 1rem;
+    min-height: 2.5rem;
+    line-height: 1.5;
 
     &:focus,
     &:focus-within {
@@ -19,22 +22,36 @@
 
     &:only-child {
       width: 100%;
+      max-width: 100%;
+      min-width: 100%;
     }
+  }
+
+  > textarea {
+    border-bottom-right-radius: 0.25rem;
   }
 
   &.input-group {
     display: flex;
     align-items: center;
 
-    > input:not(:last-child) {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+    > * {
+      flex-basis: 0;
     }
 
-    > input:not(:first-child) {
-      margin-left: 0.5rem;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+    > input,
+    > select,
+    > textarea {
+      &:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &:not(:first-child) {
+        margin-left: 0.5rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     }
   }
 }
