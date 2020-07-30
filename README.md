@@ -27,6 +27,26 @@ With these extra requirements I've chosen React as the main framework, because i
 
 I've tried to keep the code as DRY as possible (and reasonable).
 
+### Run locally
+
+After cloning:
+
+```sh
+npm install
+```
+
+Start local dev mode:
+
+```sh
+npm start
+```
+
+Run tests:
+
+```sh
+npm test
+```
+
 ### Initial bootstrap
 
 I have bootstrapped the project with [Create React App](https://github.com/facebook/create-react-app) so I did not have to tackle the bundling issues and I could focus on the content.
@@ -41,7 +61,9 @@ Linting and formatting really helps to maintain the code readable and consistent
 
 I have chosen [React i18next](https://react.i18next.com/) because it has great ecosystem, support and I've had previously good experience with it.
 
-### API
+### API and Data
+
+_All data is in browser local storage._
 
 I've wanted to try [React Query](https://react-query.tanstack.com/) for some time so this was a great opportunity to use it. It is meant mainly for REST Apis, but not necessarily. I have not deployed ani REST backend, but I've implemented a fake API endpoint which stores data in local storage of the browser. Methods of this endpoint are used in React Query hooks. When done this way this fake endpoint can be easily replaced by real API calls. This fake endpoint simulates server time response.
 
