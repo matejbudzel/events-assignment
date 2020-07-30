@@ -43,7 +43,7 @@
 
   &.on-dark-background {
     &:focus {
-      @include focus('dark');
+      @include focus("dark");
     }
   }
 
@@ -57,7 +57,7 @@
     border-radius: 0;
     opacity: 0.9;
     font-size: 90%;
-    
+
     &:hover {
       text-decoration: underline;
     }
