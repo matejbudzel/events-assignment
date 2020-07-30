@@ -1,6 +1,6 @@
 # Time spent on this assignment
 
-TOTAL: **23.5 hours**
+TOTAL: **31 hours**
 
 | **day**   | **time** | **activity**                                                                                     |
 | --------- | -------- | ------------------------------------------------------------------------------------------------ |
@@ -13,3 +13,5 @@ TOTAL: **23.5 hours**
 | 27.7.2020 | 2.5h     | Refactoring of events list + new components and style fixes                                      |
 | 28.7.2020 | 4h       | Improved events lists and event details screen                                                   |
 | 28.7.2020 | 4.5h     | Improved form and form fields + other small tweaks                                               |
+| 29.7.2020 | 3h       | Added form field validation                                                                      |
+| 29.7.2020 | 4.5h     | Complete refactoring of page structure - page parts are set through context + added timeline     |
