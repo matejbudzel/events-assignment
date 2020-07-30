@@ -12,22 +12,22 @@ export type EventStatusBadgeProps = {
 const EventStatusBadge = ({event}: EventStatusBadgeProps) => {
 	const {t} = useTranslation();
 
-	const eventStatus = event.status;
+	const {status: eventStatus} = event;
 
-	if (eventStatus === 'past' || eventStatus === 'ongoing') {
-		return (
-			<span
-				className={classnames(
-					'event-status-badge',
-					`event-status-${eventStatus}`
-				)}
-			>
-				{t(`event.status.${eventStatus}`)}
-			</span>
-		);
+	if (eventStatus === 'upcoming') {
+		return null;
 	}
 
-	return null;
+	return (
+		<span
+			className={classnames(
+				'event-status-badge',
+				`event-status-${eventStatus}`
+			)}
+		>
+			{t(`event.status.${eventStatus}`)}
+		</span>
+	);
 };
 
 export default EventStatusBadge;

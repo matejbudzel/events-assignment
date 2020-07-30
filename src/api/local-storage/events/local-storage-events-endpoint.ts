@@ -75,6 +75,7 @@ export async function addEvent(eventCreateData: EventCreate): Promise<Event> {
 
 	const validationData = validateEventCreate(eventCreateData);
 	if (validationData !== null) {
+		console.warn('invalid event create', eventCreateData, validationData);
 		throw new ValidationError(validationData);
 	}
 
@@ -108,6 +109,7 @@ export async function updateEvent(
 
 	const validationData = validateEventUpdate(eventUpdateData);
 	if (validationData !== null) {
+		console.warn('invalid event update', eventUpdateData, validationData);
 		throw new ValidationError(validationData);
 	}
 

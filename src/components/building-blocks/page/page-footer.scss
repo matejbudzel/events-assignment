@@ -1,10 +1,20 @@
 @import "../../../style/variables";
 
 .page-footer {
-  width: calc(100% - 2rem);
-  margin: 1rem 1rem 0 1rem;
+  width: 100%;
+  margin: 1rem 0 0 0;
   padding: 1rem 0;
-  border-top: $horizontal-rule-border;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: "";
+    display: block;
+    border-top: $horizontal-rule-border;
+    width: calc(100% - 2rem);
+    top: 0;
+    left: 1rem
+  }
 
   .page-footer-error {
     color: $color-danger;

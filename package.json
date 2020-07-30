@@ -43,7 +43,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test:jest": "react-scripts test",
+    "test:xo": "xo",
+    "test:pretty-css": "prettier -c src/**/*.scss",
+    "test": "npm run test:xo && npm run test:pretty-css && CI=true npm run test:jest -- --all --env=jsdom",
     "eject": "react-scripts eject"
   },
   "xo": {

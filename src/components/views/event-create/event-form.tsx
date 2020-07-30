@@ -8,7 +8,7 @@ import DurationInput from '../../building-blocks/duration-input';
 import FlexContainer from '../../building-blocks/flex-container';
 import {getEventEndDate} from '../../../api/data-object-utils/event-utils';
 import FlexSpacer from '../../building-blocks/flex-spacer';
-import {getNextFullHour} from '../../../utils/date-time-utils';
+import {getNextFullHour, isInvalidDate} from '../../../utils/date-time-utils';
 
 import TextAreaInput from '../../building-blocks/textarea-input';
 import {
@@ -34,7 +34,7 @@ const dateStateFromProp = (dateString: DateUtcString | undefined) => {
 	}
 
 	const timestamp = Date.parse(dateString);
-	if (timestamp === Number.NaN) {
+	if (isInvalidDate(timestamp)) {
 		return null;
 	}
 

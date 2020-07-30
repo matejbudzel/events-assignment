@@ -1,11 +1,14 @@
 @import "./variables";
 
-@mixin focus($type: "white") {
+@mixin focus($type: "white", $custom-color: "") {
   outline: none;
 
   $inner-shadow-color: $color-white;
   @if ($type == "dark") {
     $inner-shadow-color: $color-dark;
+  }
+  @if ($type == "custom") {
+    $inner-shadow-color: $custom-color;
   }
 
   box-shadow: 0 0 0 2px $inner-shadow-color, 0 0 0px 4px $color-focus;

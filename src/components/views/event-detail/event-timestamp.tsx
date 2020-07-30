@@ -13,10 +13,10 @@ type EventDateTimeProps = {
 };
 
 const EventDateTime = ({dateString, timeString}: EventDateTimeProps) => (
-	<>
+	<span className="event-date-time">
 		{dateString && <span className="event-date">{dateString}</span>}
 		<span className="event-time">{timeString}</span>
-	</>
+	</span>
 );
 
 export type EventTimestampProps = {
@@ -43,7 +43,7 @@ const EventTimestamp = ({event}: EventTimestampProps) => {
 			/>
 			{!oneDayEvent && (
 				<>
-					&nbsp;-&nbsp;
+					<span className="event-timestamp-days-connector">-</span>
 					<EventDateTime dateString={endDate} timeString={endTime} />
 				</>
 			)}

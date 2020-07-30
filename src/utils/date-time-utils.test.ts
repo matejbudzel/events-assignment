@@ -2,11 +2,56 @@ import {
 	getDateForInput,
 	getTimeForInput,
 	updateDateFromDateInput,
-	updateDateFromTimeInput
+	updateDateFromTimeInput,
+	isInvalidDate
 } from './date-time-utils';
 
 // Following test set is not complete
 // Overflows are not handled in any way - e.g. when month is set to 20
+
+describe('isInvalidDate', () => {
+	test('null', () => {
+		expect(isInvalidDate(null)).toBe(true);
+	});
+	test('undefined', () => {
+		expect(isInvalidDate(undefined)).toBe(true);
+	});
+
+	test('number - positive', () => {
+		expect(isInvalidDate(1)).toBe(false);
+	});
+	test('number - negativve', () => {
+		expect(isInvalidDate(-1)).toBe(false);
+	});
+
+	test('number - zero', () => {
+		expect(isInvalidDate(0)).toBe(false);
+	});
+
+	test('number - float', () => {
+		expect(isInvalidDate(1.1)).toBe(false);
+	});
+
+	test('string - random', () => {
+		expect(isInvalidDate('a')).toBe(true);
+	});
+
+	test('string - ok', () => {
+		expect(isInvalidDate('2000-01-01')).toBe(false);
+	});
+
+	test('string - number', () => {
+		expect(isInvalidDate('1')).toBe(false);
+	});
+
+	test('date - ok', () => {
+		expect(isInvalidDate(new Date())).toBe(false);
+	});
+
+	test('date - nvalid', () => {
+		expect(isInvalidDate(new Date(Number.NaN))).toBe(true);
+	});
+});
 
 describe('date for input', () => {
 	test('first of month', () => {
@@ -67,6 +112,21 @@ describe('date from input', () => {
 		expect(updatedDate.getDate()).toBe(31);
 	});
 
+	test('invalid date', () => {
+		const date = new Date(Number.NaN);
+		const updatedDate = updateDateFromDateInput(date, '2000-12-31');
+		expect(updatedDate.getFullYear()).toBe(2000);
+		expect(updatedDate.getMonth()).toBe(11);
+		expect(updatedDate.getDate()).toBe(31);
+	});
+
+	test('null date', () => {
+		const updatedDate = updateDateFromDateInput(null, '2000-12-31');
+		expect(updatedDate.getFullYear()).toBe(2000);
+		expect(updatedDate.getMonth()).toBe(11);
+		expect(updatedDate.getDate()).toBe(31);
+	});
+
 	test('catch - too many parts', () => {
 		const date = new Date();
 		expect(() => updateDateFromDateInput(date, '2000-12-31-12')).toThrow();
@@ -122,22 +182,36 @@ describe('time from input', () => {
 	test('00:00', () => {
 		const date = new Date();
 		const updatedDate = updateDateFromTimeInput(date, '00:00');
-		expect(updatedDate.getHours()).toBe(0);
-		expect(updatedDate.getMinutes()).toBe(0);
+		expect(updatedDate).toBeTruthy();
+		expect(updatedDate?.getHours()).toBe(0);
+		expect(updatedDate?.getMinutes()).toBe(0);
 	});
 
 	test('12:00', () => {
 		const date = new Date();
 		const updatedDate = updateDateFromTimeInput(date, '12:00');
-		expect(updatedDate.getHours()).toBe(12);
-		expect(updatedDate.getMinutes()).toBe(0);
+		expect(updatedDate).toBeTruthy();
+		expect(updatedDate?.getHours()).toBe(12);
+		expect(updatedDate?.getMinutes()).toBe(0);
 	});
 
 	test('23:59', () => {
 		const date = new Date();
 		const updatedDate = updateDateFromTimeInput(date, '23:59');
-		expect(updatedDate.getHours()).toBe(23);
-		expect(updatedDate.getMinutes()).toBe(59);
+		expect(updatedDate).toBeTruthy();
+		expect(updatedDate?.getHours()).toBe(23);
+		expect(updatedDate?.getMinutes()).toBe(59);
+	});
+
+	test('invalid date', () => {
+		const date = new Date(Number.NaN);
+		const updatedDate = updateDateFromTimeInput(date, '23:59');
+		expect(updatedDate).toBeNull();
+	});
+
+	test('null date', () => {
+		const updatedDate = updateDateFromTimeInput(null, '23:59');
+		expect(updatedDate).toBeNull();
 	});
 
 	test('catch - too many parts', () => {

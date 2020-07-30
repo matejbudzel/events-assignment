@@ -16,8 +16,8 @@ const AppHeader = () => {
 	return (
 		<header className="app-header">
 			<AppContent childrenWrapperClassName="app-header-content">
-				<Link to={routes.root()}>
-					<img className="app-logo" src={Logo} alt={t('app.title')} />
+				<Link to={routes.root()} className="app-logo">
+					<img src={Logo} alt={t('app.title')} />
 				</Link>
 				<Switch>
 					<Route exact path={routes.newEvent()} />

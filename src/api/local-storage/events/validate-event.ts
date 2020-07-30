@@ -9,6 +9,7 @@ import {
 	Duration
 } from '../../typings/api-common-types';
 import {normalizeValidationData} from '../../data-object-utils/validation-data-utils';
+import {isInvalidDate} from '../../../utils/date-time-utils';
 
 type ValidationFunction<T> = (value?: T | null) => ValidationErrorType | null;
 
@@ -29,7 +30,7 @@ const validateSummary: ValidationFunction<string> = required((summary) =>
 );
 
 const validateDate: ValidationFunction<DateUtcString> = required((date) =>
-	!date || Date.parse(date) === Number.NaN ? 'invalid' : null
+	!date || isInvalidDate(date) ? 'invalid' : null
 );
 
 const validateDuration: ValidationFunction<Duration> = required((duration) =>

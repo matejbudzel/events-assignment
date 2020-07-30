@@ -11,7 +11,16 @@ const AppFooter = () => {
 		<div className="app-footer">
 			<AppContent childrenWrapperClassName="app-footer-content">
 				<span>{t('app.footer.mainNote')}</span>
-				<span>{t('app.footer.timestamp')}</span>
+				<span>
+					{t('app.footer.timestamp')}&nbsp;·&nbsp;
+					<a
+						href="https://github.com/matejbudzel/events-assignment"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						sources @ GitHub
+					</a>
+				</span>
 			</AppContent>
 		</div>
 	);

@@ -24,9 +24,11 @@ const Page = ({children}: PageProps) => {
 		<div className="page">
 			{timeline && <PageTimeline {...timeline} />}
 			{headline && <PageHeadline {...headline} />}
-			<AppContent bodyContainer>
-				<div className="page-content">{children}</div>
-			</AppContent>
+			<div className="page-body">
+				<AppContent bodyContainer childrenWrapperClassName="page-body-content">
+					{children}
+				</AppContent>
+			</div>
 			{footer && <PageFooter {...footer} />}
 		</div>
 	);

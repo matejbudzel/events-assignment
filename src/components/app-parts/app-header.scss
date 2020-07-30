@@ -1,4 +1,5 @@
 @import "../../style/variables";
+@import "../../style/mixins";
 
 .app-header {
   background-color: $color-dark;
@@ -10,7 +11,21 @@
     align-items: center;
 
     .app-logo {
-      height: 1.5rem;
+      border-radius: 0.25rem;
+      padding: 0.5rem;
+      margin-left: -0.5rem;
+
+      &:hover {
+        background-color: lighten($color-dark, 10%);
+      }
+
+      &:focus {
+        @include focus("dark");
+      }
+
+      img {
+        height: 1.5rem;
+      }
     }
   }
 }

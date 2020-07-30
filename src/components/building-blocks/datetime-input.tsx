@@ -3,7 +3,8 @@ import {
 	getDateForInput,
 	getTimeForInput,
 	updateDateFromDateInput,
-	updateDateFromTimeInput
+	updateDateFromTimeInput,
+	isInvalidDate
 } from '../../utils/date-time-utils';
 import {InputProps, InputWrapper} from './input';
 import useFocusOnMount from '../hooks/use-focus-on-mount';
@@ -39,40 +40,40 @@ const DateTimeInput = ({
 	const valueTimestamp = value ? value.getTime() : undefined;
 
 	useEffect(() => {
-		// Prop value has changed -> update the internal state
-		const _value =
-			valueTimestamp === undefined ? undefined : new Date(valueTimestamp);
-		setDateValue(_value ? getDateForInput(_value) : '');
-		setTimeValue(_value ? getTimeForInput(_value) : '');
+		// Prop value has changed -> update the internal state, but only when the prop value is valid
+		// Keep the internal state untouched otherwise
+		const _value = isInvalidDate(valueTimestamp)
+			? undefined
+			: new Date(valueTimestamp!);
+		if (_value) {
+			setDateValue(getDateForInput(_value));
+			setTimeValue(getTimeForInput(_value));
+		}
 	}, [valueTimestamp]);
 
 	useEffect(() => {
-		// Date input changed value - parse it and notify the parent - null if parsing failed
+		// Date or time input changed value - parse it and notify the parent - null if parsing failed
 		const _onChange = onChangeRef.current;
 		const _value = valueRef.current;
-		if (_value && _onChange) {
+		if (_onChange) {
+			let updatedDate = _value;
 			try {
-				_onChange(updateDateFromDateInput(_value, dateValue));
+				updatedDate = updateDateFromDateInput(_value, dateValue);
 			} catch (error) {
-				console.debug('invalid date value - id:', idRef.current, error);
-				_onChange(null);
+				console.debug('invalid date value:', idRef.current, error);
+				updatedDate = null;
 			}
-		}
-	}, [dateValue, idRef, onChangeRef, valueRef]);
 
-	useEffect(() => {
-		// Time input changed value - parse it and notify the parent - null if parsing failed
-		const _onChange = onChangeRef.current;
-		const _value = valueRef.current;
-		if (_value && _onChange) {
 			try {
-				_onChange(updateDateFromTimeInput(_value, timeValue));
+				updatedDate = updateDateFromTimeInput(_value, dateValue);
 			} catch (error) {
-				console.debug('invalid time value - id:', idRef.current, error);
-				_onChange(null);
+				console.debug('invalid time value:', idRef.current, error);
+				updatedDate = null;
 			}
+
+			_onChange(updatedDate);
 		}
-	}, [timeValue, idRef, onChangeRef, valueRef]);
+	}, [dateValue, timeValue, onChangeRef, valueRef]);
 
 	return (
 		<InputWrapper group id={id} invalid={invalid}>

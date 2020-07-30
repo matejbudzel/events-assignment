@@ -74,5 +74,5 @@ export function saveDataToLocalStorage<T>(
 }
 
 export const simulateServerResponseTime = async () => {
-	await delay(5 + Math.floor(Math.random() * 20));
+	await delay(50 + Math.floor(Math.random() * 100));
 };
