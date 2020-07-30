@@ -2,7 +2,7 @@
 
 This project was created as an interview assignment.
 
-It is deployed on [Netlify](https://www.netlify.com/) and it is available here: [HERE](https://events-assignment.budzel.sk/new-event).
+It is deployed on [Netlify](https://www.netlify.com/) and it is available: [HERE](https://events-assignment.budzel.sk/new-event).
 
 ## Assignment
 
@@ -12,7 +12,7 @@ Paraphrazed text of the assignment:
 
 ### My adjustments
 
-In the end I've had more time on this task then I originally expected so I've added some "complications", because this was a nice opportunity to try some things that I've always wanted to, but did not have the change yet.
+I've had more time on this task then I originally expected so I've added some "complications", because this was a nice opportunity to try some things that I've always wanted to, but did not have the change yet.
 
 I decided that proper SPA which could grow in the future should have some topics addressed in the beginning, because they are hard to add later in the project:
 
@@ -47,7 +47,7 @@ I've wanted to try [React Query](https://react-query.tanstack.com/) for some tim
 
 ### Unit tests
 
-I've implemented only a few unit tests. There should be much more for a proper test coverage, but I think as a teaser of how I whould do the rest this is sufficient for purposes of this assignment.
+I've implemented only a few unit tests. There should be much more for a proper test coverage, but I think as a teaser of how I would do the rest this is sufficient (for purposes of this assignment).
 
 ### Styling and Components
 
@@ -59,14 +59,55 @@ I could opt for ready-to-use component libraries like Bootstrap, but I needed on
 
 I could have used some CSS-in-JS library like [styled components](https://styled-components.com/), but I did not find it necessary. If this application should support some theming, then I'd go this way instead of basic CSS/SASS.
 
+### Markup structure
+
+Mostly basic and common layout:
+
+```txt
+Header
+----------
+Content
+----------
+Footer
+```
+
+#### Page
+
+_Content_ can be anything but there is available a standard _Page_:
+
+```txt
+Page Timeline - optional
+----------
+Page Header - optional
+Page Content
+----------
+Page Footer - optional
+```
+
+There is only a single instance of the _Page_ and it can be modified throgh `React.Context`. With this approach the pages can focus on their content and they just set their content into otherwise standardized header and footer.
+
+#### Error Boundary and Suspense
+
+There is global _Error Boundary_ and _Suspense_ implemented.
+
+#### Forms
+
+Form fields are validated.
+
 ## Known issues
 
 This is not a complete list, just a few thing I wanted to highlight:
 
 - date-time input is really basic and can fallback to text inputs on some devices - a complex component like [React Datepicker](https://reactdatepicker.com/) could be used instead.
+- event can not be edited (but I've prepared the fake API for it)
+- form field validation is really basic
 - I've mostly ignored older browsers of any kind
 - not tested on Apple handheld devices
-- UX is not great, I have some ideas how to improve it, but this I can discuss directly in-person
+- Markup preview lacks any styling
+- UX is not great, I have some ideas how to improve it, I can discuss directly in-person, here are some points:
+  - delete action should be confirmed by the user
+  - event date should be displayed in relative way, too
+  - there should be relation to other events shown on event detail page
 
 ## Time tracking
 
