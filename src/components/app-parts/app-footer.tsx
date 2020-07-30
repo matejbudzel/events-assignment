@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './app-footer.scss';
-import AppContent from '../building-blocks/app-content';
+import AppContent from '../building-blocks/containers/app-content';
 import {useTranslation} from 'react-i18next';
 
 const AppFooter = () => {

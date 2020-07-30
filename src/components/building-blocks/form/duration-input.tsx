@@ -1,7 +1,7 @@
 import React from 'react';
 import {InputProps, InputWrapper} from './input';
 import {useTranslation} from 'react-i18next';
-import useFocusOnMount from '../hooks/use-focus-on-mount';
+import useFocusOnMount from '../../hooks/use-focus-on-mount';
 
 export type DurationInputProps = InputProps<number>;
 

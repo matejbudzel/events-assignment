@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 
 import './page-footer.scss';
-import AppContent from '../app-content';
+import AppContent from '../containers/app-content';
 
 export type PageFooterProps = {
 	children: ReactNode;

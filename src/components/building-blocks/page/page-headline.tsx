@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 
 import './page-headline.scss';
-import AppContent from '../app-content';
+import AppContent from '../containers/app-content';
 
 export type PageHeadlineProps = {
 	children?: ReactNode;

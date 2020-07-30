@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import FetchedContent from '../../building-blocks/fetched-content';
+import FetchedContent from '../../building-blocks/containers/fetched-content';
 import EventsList from './events-list';
 import {
 	EventsListResponse,

@@ -3,7 +3,7 @@ import {useParams, Redirect} from 'react-router-dom';
 import useEvent from '../../../api/hooks/events/use-event';
 import {useTranslation} from 'react-i18next';
 import {Slug} from '../../../api/typings/api-common-types';
-import FetchedContent from '../../building-blocks/fetched-content';
+import FetchedContent from '../../building-blocks/containers/fetched-content';
 
 import EventDetail from './event-detail';
 import MessageOverlay from '../../building-blocks/message-overlay';

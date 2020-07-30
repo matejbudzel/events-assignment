@@ -1,6 +1,6 @@
 import React from 'react';
 import {InputProps, InputWrapper} from './input';
-import useFocusOnMount from '../hooks/use-focus-on-mount';
+import useFocusOnMount from '../../hooks/use-focus-on-mount';
 
 export type TextAreaInputProps = InputProps<string> & {
 	placeholder?: string;

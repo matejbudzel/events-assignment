@@ -9,7 +9,7 @@ import {
 	usePageTimeline
 } from '../../contexts/page-context';
 import PageTimeline from './page-timeline';
-import AppContent from '../app-content';
+import AppContent from '../containers/app-content';
 
 export type PageProps = {
 	children?: ReactNode;

@@ -5,7 +5,7 @@ import {routes} from '../../../routes';
 
 import './page-timeline.scss';
 import {EventsListType} from '../../../api/typings/events/api-events-response-types';
-import AppContent from '../app-content';
+import AppContent from '../containers/app-content';
 
 type PageTimelineItemProps = {
 	highlighted: boolean;

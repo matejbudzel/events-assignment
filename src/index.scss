@@ -14,6 +14,7 @@ body {
   color: $color-text;
 }
 
+// use border-box by default on all elements
 *,
 *::before,
 *::after {

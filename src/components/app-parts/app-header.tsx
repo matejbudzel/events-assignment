@@ -7,7 +7,7 @@ import './app-header.scss';
 
 import Logo from '../../images/logo.svg';
 import Button from '../building-blocks/button';
-import AppContent from '../building-blocks/app-content';
+import AppContent from '../building-blocks/containers/app-content';
 
 const AppHeader = () => {
 	const {t} = useTranslation();

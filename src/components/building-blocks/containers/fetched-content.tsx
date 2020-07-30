@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {useTranslation} from 'react-i18next';
-import MessageOverlay from './message-overlay';
+import MessageOverlay from '../message-overlay';
 
 import './fetched-content.scss';
 

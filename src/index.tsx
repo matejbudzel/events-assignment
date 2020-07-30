@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './ui-root';
 import * as serviceWorker from './service-worker';
 import {ReactQueryDevtools} from 'react-query-devtools';
 
 import './i18n';
+import App from './components/app';
 
 ReactDOM.render(
 	<React.StrictMode>

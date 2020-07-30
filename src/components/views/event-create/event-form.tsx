@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import Form from '../../building-blocks/form';
-import FormField from '../../building-blocks/form-field';
+import Form from '../../building-blocks/form/form';
+import FormField from '../../building-blocks/form/form-field';
 import {useTranslation} from 'react-i18next';
-import TextInput from '../../building-blocks/text-input';
-import DateTimeInput from '../../building-blocks/datetime-input';
-import DurationInput from '../../building-blocks/duration-input';
-import FlexContainer from '../../building-blocks/flex-container';
+import TextInput from '../../building-blocks/form/text-input';
+import DateTimeInput from '../../building-blocks/form/datetime-input';
+import DurationInput from '../../building-blocks/form/duration-input';
+import FlexContainer from '../../building-blocks/containers/flex-container';
 import {getEventEndDate} from '../../../api/data-object-utils/event-utils';
 import FlexSpacer from '../../building-blocks/flex-spacer';
 import {getNextFullHour, isInvalidDate} from '../../../utils/date-time-utils';
 
-import TextAreaInput from '../../building-blocks/textarea-input';
+import TextAreaInput from '../../building-blocks/form/textarea-input';
 import {
 	ValidationData,
 	DateUtcString,

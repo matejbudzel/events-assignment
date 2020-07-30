@@ -5,9 +5,9 @@ import {
 	updateDateFromDateInput,
 	updateDateFromTimeInput,
 	isInvalidDate
-} from '../../utils/date-time-utils';
+} from '../../../utils/date-time-utils';
 import {InputProps, InputWrapper} from './input';
-import useFocusOnMount from '../hooks/use-focus-on-mount';
+import useFocusOnMount from '../../hooks/use-focus-on-mount';
 
 export type DateTimeInputProps = InputProps<Date | null>;
 
