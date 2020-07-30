@@ -58,16 +58,16 @@ const DateTimeInput = ({
 		if (_onChange) {
 			let updatedDate = _value;
 			try {
-				updatedDate = updateDateFromDateInput(_value, dateValue);
+				updatedDate = updateDateFromDateInput(updatedDate, dateValue);
 			} catch (error) {
-				console.debug('invalid date value:', idRef.current, error);
+				console.debug('invalid date value:', dateValue, idRef.current, error);
 				updatedDate = null;
 			}
 
 			try {
-				updatedDate = updateDateFromTimeInput(_value, dateValue);
+				updatedDate = updateDateFromTimeInput(updatedDate, timeValue);
 			} catch (error) {
-				console.debug('invalid time value:', idRef.current, error);
+				console.debug('invalid time value:', timeValue, idRef.current, error);
 				updatedDate = null;
 			}
 
