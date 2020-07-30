@@ -5,8 +5,9 @@ import App from './app';
 
 test('smoke test - check if it at least renders', async () => {
 	const createEventText = i18n.t('action.addEvent');
-	const {findByText} = render(<App />);
-	const createEventElement = await findByText(createEventText);
+	render(<App />);
+	const createEventElement = await waitForElement(async () =>
+		screen.findByText(createEventText)
+	);
 	expect(createEventElement).toBeInTheDocument();
-	await waitForElement(async () => screen.findByText(createEventText));
 });
