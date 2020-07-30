@@ -47,7 +47,7 @@ export async function fetchPastEvents(): Promise<EventsListResponse> {
 
 	return {
 		type: 'past',
-		events: loadEventsInPeriod(MIN_DATE, now, false)
+		events: loadEventsInPeriod(MIN_DATE, now, false).reverse()
 	};
 }
 

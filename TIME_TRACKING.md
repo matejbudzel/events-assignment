@@ -1,6 +1,6 @@
 # Time spent on this assignment
 
-TOTAL: **31 hours**
+TOTAL: **34 hours**
 
 | **day**   | **time** | **activity**                                                                                     |
 | --------- | -------- | ------------------------------------------------------------------------------------------------ |
@@ -15,3 +15,4 @@ TOTAL: **31 hours**
 | 28.7.2020 | 4.5h     | Improved form and form fields + other small tweaks                                               |
 | 29.7.2020 | 3h       | Added form field validation                                                                      |
 | 29.7.2020 | 4.5h     | Complete refactoring of page structure - page parts are set through context + added timeline     |
+| 30.7.2020 | 3        | Small improvements & finalization touches                                                        |

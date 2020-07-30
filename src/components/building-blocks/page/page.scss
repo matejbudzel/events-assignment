@@ -3,13 +3,12 @@
 .page {
   @include body-container;
 
-  position: relative;
-
   .page-body {
     @include body-container(auto);
 
-    .page-content {
+    .page-body-content {
       @include body-container(auto);
+      position: relative;
     }
   }
 }
