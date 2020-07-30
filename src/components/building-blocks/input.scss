@@ -8,7 +8,7 @@
     border: $input-border-width solid rgba($color-dark, 0.5);
     padding: 0.5rem $input-padding;
     border-radius: 1rem;
-    min-height: 2.5rem;
+    height: 3rem;
     line-height: 1.5;
 
     &:focus,
@@ -29,6 +29,7 @@
 
   > textarea {
     border-bottom-right-radius: 0.25rem;
+    min-height: 3rem;
   }
 
   &.invalid {

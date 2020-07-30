@@ -3,12 +3,4 @@
 
 .app-body {
   @include body-container;
-
-  > * {
-    @include body-container;
-  }
-
-  .app-body-content {
-    @include body-container;
-  }
 }

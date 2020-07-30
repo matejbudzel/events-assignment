@@ -1,0 +1,137 @@
+@import "../../../style/variables";
+@import "../../../style/mixins";
+
+$timeline-background-color: $color-white;
+
+.page-timeline {
+  width: 100%;
+  position: relative;
+  background-color: $timeline-background-color;
+  padding-bottom: 1rem;
+
+  &:before {
+    content: "";
+    display: block;
+    height: 2px;
+    position: absolute;
+    left: 1rem;
+    bottom: calc(2rem - 1px);
+    width: calc(100% - 2rem);
+    background-color: $horizontal-rule-color;
+    z-index: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1 0 33.33%;
+
+      &:after,
+      &:before {
+        content: "";
+        display: block;
+        border: 2px solid rgba($color-secondary, 0.6);
+        width: 1rem;
+        height: 1rem;
+        border-radius: 1rem;
+        background-color: $timeline-background-color;
+        box-shadow: 0 0 0 4px $timeline-background-color;
+      }
+
+      &:before {
+        content: none;
+      }
+
+      &.highlighted {
+        &:after,
+        &:before {
+          border-color: $color-primary;
+          background-color: $color-primary-light;
+        }
+      }
+
+      a,
+      span {
+        margin-bottom: 0.5rem;
+        text-decoration: none;
+        background-color: transparent;
+        border: 2px solid transparent;
+        padding: 0.25rem 0.5rem;
+        border-radius: 1rem;
+        color: $color-text;
+        transition-duration: 0.25s;
+        transition-property: background-color, border-color;
+        line-height: 1.5;
+      }
+      
+      span {
+        opacity: 0.5;
+      }
+
+      a {
+        &:hover {
+          background-color: rgba($color-primary-light, 0.4);
+          border-color: rgba($color-primary, 0.8);
+        }
+
+        &:focus {
+          @include focus;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 38rem) {
+    padding-top: 0.5rem;
+
+    &:before {
+      left: calc(1.5rem - 1px);
+      top: 0.75rem;
+      bottom: 0.75rem;
+      right: auto;
+      width: 2px;
+      height: auto;
+    }
+
+    ul {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.5rem 0;
+
+      li {
+        flex-direction: row;
+        width: 100%;
+
+        &:before {
+          content: "";
+        }
+
+        &:after {
+          content: none;
+        }
+
+        + li {
+          margin-top: 0.5rem;
+        }
+
+        a {
+          margin-bottom: 0;
+          margin-left: 0.5rem;
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+}

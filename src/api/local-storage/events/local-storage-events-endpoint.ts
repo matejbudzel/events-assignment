@@ -18,16 +18,25 @@ import {loadEventsInPeriod, loadData, saveData} from './events-endpoint-utils';
 import {validateEventCreate, validateEventUpdate} from './validate-event';
 import ValidationError from '../../../utils/validation-error';
 
-export async function fetchOngoingAndUpcomingEvents(): Promise<
-	EventsListResponse
-> {
+export async function fetchUpcomingEvents(): Promise<EventsListResponse> {
 	await simulateServerResponseTime();
 
 	const now = new Date();
 
 	return {
-		type: 'ongoing-upcoming',
-		events: loadEventsInPeriod(now, MAX_DATE, true)
+		type: 'upcoming',
+		events: loadEventsInPeriod(now, MAX_DATE, false)
+	};
+}
+
+export async function fetchOngoingEvents(): Promise<EventsListResponse> {
+	await simulateServerResponseTime();
+
+	const now = new Date();
+
+	return {
+		type: 'ongoing',
+		events: loadEventsInPeriod(now, now, true)
 	};
 }
 

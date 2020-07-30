@@ -5,6 +5,10 @@ export const routes = {
 
 	pastEvents: () => '/past-events',
 
+	ongoingEvents: () => '/ongoing-events',
+
+	upcomingEvents: () => '/upcoming-events',
+
 	newEvent: () => '/new-event',
 
 	eventDetails: (eventSlug?: Slug) => `/event/${eventSlug ?? ':eventSlug'}`

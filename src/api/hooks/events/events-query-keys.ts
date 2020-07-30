@@ -1,7 +1,6 @@
 import {Uuid, isUuid} from '../../typings/api-common-types';
 import {AnyQueryKey} from 'react-query';
-
-export type EventsListType = 'ongoing-upcoming' | 'past';
+import {EventsListType} from '../../typings/events/api-events-response-types';
 
 export type EventsListQueryKey = ['events', EventsListType];
 

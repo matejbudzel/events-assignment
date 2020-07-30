@@ -6,10 +6,20 @@ import './app-content.scss';
 export type PageContentProps = {
 	childrenWrapperClassName?: string;
 	children?: ReactNode;
+	bodyContainer?: boolean;
 };
 
-const AppContent = ({childrenWrapperClassName, children}: PageContentProps) => (
-	<div className="app-content">
+const AppContent = ({
+	childrenWrapperClassName,
+	children,
+	bodyContainer
+}: PageContentProps) => (
+	<div
+		className={classnames(
+			'app-content',
+			bodyContainer && 'app-content-body-container'
+		)}
+	>
 		<div
 			className={classnames('app-content-children', childrenWrapperClassName)}
 		>

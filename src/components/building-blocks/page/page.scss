@@ -1,0 +1,9 @@
+@import "../../../style/mixins";
+
+.page {
+  @include body-container;
+
+  .page-content {
+    @include body-container(auto);
+  }
+}

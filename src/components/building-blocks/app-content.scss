@@ -1,8 +1,21 @@
 @import "../../style/variables";
+@import "../../style/mixins";
 
 .app-content {
   max-width: $content-max-width;
   margin: 0 auto;
   width: 100%;
   padding: 0 1rem;
+
+  &.app-content-body-container {
+    @include body-container;
+
+    > .app-content-children {
+      @include body-container;
+    }
+  }
+
+  > .app-content-children {
+    width: 100%;
+  }
 }

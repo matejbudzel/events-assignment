@@ -25,6 +25,7 @@ const TextAreaInput = ({
 				disabled={disabled}
 				value={value}
 				placeholder={placeholder}
+				rows={10}
 				onChange={
 					onChange ? (event) => onChange(event.target.value) : undefined
 				}

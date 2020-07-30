@@ -13,16 +13,13 @@
     "addEvent": "create event",
     "save": "save",
     "delete": "delete",
-    "goHome": "go to the homescreen",
-    "showPastEvent": "show past events",
-    "showOngoingAndUpcomingEvents": "show ongoing & upcoming events"
+    "goHome": "go to the homescreen"
   },
   "events": {
     "list": {
       "pageTitle": {
-        "ongoing": "🕐 Ongoing Events",
         "upcoming": "🕐 Upcoming Events",
-        "ongoingUpcoming": "🕐 Ongoing & Upcoming Events",
+        "ongoing": "🏃 Ongoing Events",
         "past": "🛑 Past Events"
       },
       "loading": "Loading events...",
@@ -30,6 +27,7 @@
       "error": "Failed to load events. Error: {{message}}",
       "empty": {
         "upcoming": "There are no upcoming events.",
+        "ongoing": "There are no ongoing events.",
         "past": "There are no past events."
       }
     }

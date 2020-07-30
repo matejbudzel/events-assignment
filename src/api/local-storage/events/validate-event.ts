@@ -8,6 +8,7 @@ import {
 	DateUtcString,
 	Duration
 } from '../../typings/api-common-types';
+import {normalizeValidationData} from '../../data-object-utils/validation-data-utils';
 
 type ValidationFunction<T> = (value?: T | null) => ValidationErrorType | null;
 
@@ -35,15 +36,6 @@ const validateDuration: ValidationFunction<Duration> = required((duration) =>
 	!duration || duration === 0 ? 'invalid' : null
 );
 
-const nullIfEmpty = (validationData: ValidationData) => {
-	const someFieldsInvalid =
-		Object.values(validationData).filter(
-			(validationValue) => validationValue !== null
-		).length > 0;
-
-	return someFieldsInvalid ? validationData : null;
-};
-
 export const validateEventCreate = (eventCreateData: EventCreate) => {
 	const validationData: ValidationData = {
 		summary: validateSummary(eventCreateData.summary),
@@ -51,7 +43,7 @@ export const validateEventCreate = (eventCreateData: EventCreate) => {
 		duration: validateDuration(eventCreateData.duration)
 	};
 
-	return nullIfEmpty(validationData);
+	return normalizeValidationData(validationData);
 };
 
 export const validateEventUpdate = (eventUpdateData: EventUpdate) => {
@@ -70,5 +62,5 @@ export const validateEventUpdate = (eventUpdateData: EventUpdate) => {
 				: validateDuration(eventUpdateData.duration)
 	};
 
-	return nullIfEmpty(validationData);
+	return normalizeValidationData(validationData);
 };

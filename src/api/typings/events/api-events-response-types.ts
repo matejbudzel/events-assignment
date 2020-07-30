@@ -19,7 +19,9 @@ export type Event = Readonly<{
 	status: EventStatus;
 }>;
 
+export type EventsListType = EventStatus;
+
 export type EventsListResponse = Readonly<{
-	type: 'ongoing-upcoming' | 'past';
+	type: EventsListType;
 	events: Event[];
 }>;

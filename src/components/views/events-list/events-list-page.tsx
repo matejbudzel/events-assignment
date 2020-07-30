@@ -1,33 +1,15 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import FetchedContent from '../../building-blocks/fetched-content';
 import EventsList from './events-list';
+import {
+	EventsListResponse,
+	EventsListType
+} from '../../../api/typings/events/api-events-response-types';
+
+import {PageHeadlineProps} from '../../building-blocks/page/page-headline';
+import {usePageHeadline, usePageTimeline} from '../../contexts/page-context';
 import {useTranslation} from 'react-i18next';
-import {EventsListResponse} from '../../../api/typings/events/api-events-response-types';
-import Page from '../../building-blocks/page';
-
-import './events-list-page.scss';
-
-type EventsListPageActionProps = {
-	action: JSX.Element;
-	actionPlacement: 'top' | 'bottom';
-};
-
-const EventsListPageAction = ({
-	action,
-	actionPlacement
-}: EventsListPageActionProps) => {
-	if (action && actionPlacement) {
-		return (
-			<div
-				className={`events-list-page-action events-list-page-action-${actionPlacement}`}
-			>
-				<div className="events-list-page-action-children">{action}</div>
-			</div>
-		);
-	}
-
-	return null;
-};
+import {PageTimelineProps} from '../../building-blocks/page/page-timeline';
 
 export type EventsListPageProps = {
 	headlineMessage?: string;
@@ -38,8 +20,7 @@ export type EventsListPageProps = {
 	error?: Error | null;
 	data?: EventsListResponse;
 	isFetching: boolean;
-	action?: JSX.Element;
-	actionPlacement?: 'top' | 'bottom';
+	listType: EventsListType;
 };
 
 const EventsListPage = ({
@@ -51,45 +32,52 @@ const EventsListPage = ({
 	error,
 	data,
 	isFetching,
-	action,
-	actionPlacement
+	listType
 }: EventsListPageProps) => {
 	const {t} = useTranslation();
 
+	const hasSomeEvents = data !== undefined && data.events.length > 0;
+
+	const headlineText =
+		headlineMessage && hasSomeEvents ? t(headlineMessage) : undefined;
+
+	const headlineProps: PageHeadlineProps = useMemo(
+		() => ({
+			children: headlineText
+		}),
+		[headlineText]
+	);
+
+	usePageHeadline(headlineProps);
+
+	const timelineProps: PageTimelineProps = useMemo(
+		() => ({
+			highlighted: listType,
+			selected: listType
+		}),
+		[listType]
+	);
+
+	usePageTimeline(timelineProps);
+
 	return (
-		<div className="events-list-page">
-			{action && actionPlacement === 'top' && (
-				<EventsListPageAction
-					action={action}
-					actionPlacement={actionPlacement}
+		<FetchedContent
+			isLoading={isLoading}
+			loadingMessage="events.list.loading"
+			isError={isError}
+			errorMessage="events.list.error"
+			error={error ?? undefined}
+			isFetching={isFetching}
+			fetchingMessage="events.list.updating"
+		>
+			{() => (
+				<EventsList
+					events={data?.events}
+					emptyListMessage={emptyListMessage}
+					emptyListAction={emptyListAction}
 				/>
 			)}
-			<Page headline={headlineMessage && t(headlineMessage)}>
-				<FetchedContent
-					isLoading={isLoading}
-					loadingMessage="events.list.loading"
-					isError={isError}
-					errorMessage="events.list.error"
-					error={error ?? undefined}
-					isFetching={isFetching}
-					fetchingMessage="events.list.updating"
-				>
-					{() => (
-						<EventsList
-							events={data?.events}
-							emptyListMessage={emptyListMessage}
-							emptyListAction={emptyListAction}
-						/>
-					)}
-				</FetchedContent>
-			</Page>
-			{action && actionPlacement === 'bottom' && (
-				<EventsListPageAction
-					action={action}
-					actionPlacement={actionPlacement}
-				/>
-			)}
-		</div>
+		</FetchedContent>
 	);
 };
 
